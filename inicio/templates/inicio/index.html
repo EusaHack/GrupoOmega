@@ -1,0 +1,16 @@
+{% extends 'inicio/base.html' %}
+{% load static %}
+{% block section %}
+<section class="zona-1">
+    <div class="container">
+        <img class="image-zona-1" src="{% static 'inicio/images/home-images/ini-img.png' %}" alt="">
+    </div>
+    <div class="txt-start">
+        <h1>Empaqueta tu futuro con nuestras cajas multiusos, diseñadas para hacer envíos en línea y proyectos creativos
+            más faciles y más elegantes que nunca...
+        </h1>
+        <p>¡DESCUBRE LA CALIDAD QUE MARCA LA DIFERENCA!</p>
+        <button class="button-send" onclick="openModalForm()">Realiza una cotización</button>
+    </div> 
+</section>
+{% endblock %}

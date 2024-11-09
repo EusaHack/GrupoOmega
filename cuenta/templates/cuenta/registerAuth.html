@@ -1,0 +1,17 @@
+{% extends 'cuenta/base.html' %}
+{% load static %}
+{% block section %}
+<section class="zona-5">
+    <div class="register">
+        <img src="{% static 'inicio/images/login/background-1.jpg' %}" alt="">
+    </div>
+    <div class="txt-register">
+        <form id="formCodeAuth" method="post" action="{% url 'codeUserValidation' %}">
+            {% csrf_token %}
+            <h2>Registro</h2>
+            <input type="text" name="code_auth" placeholder="Codigo de Empresa" maxlength="4">
+            <button type="submit">Enviar Codigo</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

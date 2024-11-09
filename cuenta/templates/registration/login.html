@@ -1,0 +1,38 @@
+{% extends 'cuenta/base.html' %}
+{% load static %}
+{% block section %}
+<section class="zona-6">
+    <div class="login">
+        <img src="{% static 'inicio/images/login/background-2.jpg' %}" alt="">
+    </div>
+    <div class="txt-login">
+        <form method="POST">
+            {% csrf_token %}
+            <h2>Iniciar Sesion</h2>
+            {% if form.errors %}
+                <p class="error">Credenciales o Usuario incorrecto, por favor inténtalo de nuevo.</p>
+            {% endif %}
+            <input type="text" placeholder="Ingrese su correo" name="username">
+            <input type="password" placeholder="Contraseña" name="password">
+            <button type="submit" >Ingresar</button>
+            <p class="link-registro"><a href="{% url 'authorization' %}">¿ Aun no tienes cuenta ?</a></p>
+            <p class="link-password"><a href="#" onclick="openModalReset()">Cambiar Contraseña</a></p>
+        </form>
+    </div>
+    <div class="modal-reset" id="modal-reset">
+        <div class="modal-content-reset">
+            <span class="close-reset" onclick="closeModalReset()">&times;</span>
+            <form id="myform" method="post" action="">
+                {% csrf_token %}
+                <p>Ingrese su correo electrónico para recibir el código de restablecimiento.</p>
+                <input type="text" placeholder="Ingrese su correo" name="date_email">
+                <button type="submit" id="number_btn">Enviar Código</button>
+                <input type="hidden" id="action" name="action" value="">
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script src="{% static 'cuenta/js/scripts-login.js' %}"></script>
+{% endblock %}

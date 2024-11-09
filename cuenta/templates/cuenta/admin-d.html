@@ -1,0 +1,30 @@
+{% extends 'cuenta/baseDashboard.html' %}
+{% load static %}
+
+{% block avatar %}
+    <div class="user-avatar">
+        <img class="user-avatar" src="{% static 'inicio/images/avatar/admin.jfif' %}" alt="Imagen de usuario">
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <div class="menu-content">
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="{% url 'dashboard_inicio' %}">Dashboard</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Pedidos</a></li>
+            <li><a href="#">Facturas</a></li>
+            <li><a href="#">Clientes</a></li>
+            <li><a href="{% url 'modificaciones' %}">Modificaciones</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block dashboard %}
+    <section class="dashboard">
+        <h2>Dashboard</h2>
+        <p>¡Bienvenido al dashboard! Por favor, elige la opción que desees explorar.</p>
+        <button>Cambiar</button>
+    </section>
+{% endblock %}

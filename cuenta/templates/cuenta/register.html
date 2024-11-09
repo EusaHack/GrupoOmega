@@ -1,0 +1,24 @@
+{% extends 'cuenta/base.html' %}
+{% load static %}
+{% block section %}
+<section class="zona-5">
+    <div class="register">
+        <img src="{% static 'inicio/images/login/background-1.jpg' %}" alt="">
+    </div>
+    <div class="txt-register">
+        <form id="formRegister" method="post" action="{% url 'create_new_user' %}">
+            {% csrf_token %}
+            <h2>Registro</h2>
+            <input type="text" id="nameInput" name="name" placeholder="Ingrese su nombre">
+            <input type="tel" id="phoneInput" name="phone_number" placeholder="Ingrese su telefono" maxlength="10">
+            <input type="password" name="password" id="passInput" placeholder="Ingrese la contrasena">
+            <input type="password" name="password_confirmed" id="confirmedPassInput" placeholder="Confirme contrasena">
+            <button type="button" id="enviarBtn">Registrarse</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'cuenta/js/register.js' %}"></script>
+{% endblock %}

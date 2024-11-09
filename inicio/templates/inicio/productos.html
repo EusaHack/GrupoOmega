@@ -1,0 +1,36 @@
+{% extends 'inicio/base.html' %}
+{% load static %}
+{% block section %}
+<section class="zona-3">
+    <div class="products">
+        <img id="image-carousel" src="{% static 'inicio/images/carousel/cardboard-box-preview.png'%}" alt="">
+    </div>
+    <div class="txt-products">
+        <h2>Productos</h2>
+        <ul class="list-product">
+            <li>
+                <div id="txt-1">✓ Cajas para usus múltiples </div>
+            </li>
+            <li>
+                <div id="txt-2">✓ Cajas para envíos de venta en línea </div>
+            </li>
+            <li>
+                <div id="txt-3">✓ Cajas para archivo muerto </div>
+            </li>
+            <li>
+                <div id="txt-4">✓ Contenedores cerrados </div>
+            </li>
+            <li>
+                <div id="txt-5">✓ Contenedores calados </div>
+            </li>
+            <li>
+                <div id="txt-6">✓ Cartón corrugado </div>
+            </li>
+            <li>
+                <div id="txt-7">✓ Esquineros </div>
+            </li>
+        </ul>
+        <button onclick="openModalForm()">Realiza una Cotización</button>
+    </div>
+</section>
+{% endblock %}

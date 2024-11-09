@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'inicio/css/style.css' %}" />
+    <title>Grupo Omega</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-img">
+            <a href="{% url 'inicio' %}">Grupo Omega</a>
+            <img src="{% static 'inicio/images/home-images/logo.png' %}" alt="Logo marca">
+        </div>
+        <div class="mobile-menu">
+            <img class="menu-icon" src="{% static 'inicio/images/icons/menu-ico.svg' %}" alt="Menu" onclick="toggleMenu()">
+        </div>
+        <nav>
+            <ul class="nav-links" id="navLinks">
+                <img class="icon" src="{% static 'inicio/images/icons/home-ico.svg' %}" alt="">
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <img class="icon" src="{% static 'inicio/images/icons/us-ico.svg' %}" alt="">
+                <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+                <img class="icon" src="{% static 'inicio/images/icons/product-ico.svg' %}" alt="">
+                <li><a href="{% url 'productos' %}">Productos</a></li>
+                <img class="icon" src="{% static 'inicio/images/icons/email-ico.svg' %}" alt="">
+                <li><a href="{% url 'contacto' %}">Contacto</a></li>
+            </ul>
+        </nav>
+        <button class="btn"><a href="{% url 'user_dashboard' %}">Iniciar Sesion</a></button>
+    </header>
+    {% block section %}
+    {% endblock %}
+    <!-- ventana emergente -->
+    <div id="modal" class="container-modal">
+        <div class="content-modal">
+            <form>
+                <span class="close-modal" onclick="closeModalWindow()">&times;</span>
+                <p>Cuéntanos sobre tus necesidades para poder
+                    brindarte la solución que mejor se adapte
+                    a tus requerimientos.</p>
+                <div class="input-group">
+                    <input type="text" placeholder="Producto">
+                    <input type="text" placeholder="Cantidad">
+                </div>
+                <div class="image-form">
+                    <div class="input-container">
+                        <input type="text" placeholder="Ciudad">
+                        <input type="text" placeholder="Nombre">
+                        <input type="email" placeholder="Correo">
+                        <input type="tel" placeholder="Telefono">
+                        <input type="text" placeholder="Empresa">
+                    </div>
+                    <img src="{% static 'inicio/images/home-images/box.png' %}" alt="Imagen">
+                </div>
+
+                <textarea placeholder="mensaje"></textarea>
+            </form>
+            <button class="btn-close">Enviar</button>
+        </div>
+    </div>    
+    <script>
+        BASE_IMAGE_URL = "{% static 'inicio/images/carousel/' %}";
+    </script>
+    <script src="{% static 'inicio/js/scripts.js' %}"></script>
+</body>
+</html>

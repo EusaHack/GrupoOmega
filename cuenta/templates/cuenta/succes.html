@@ -1,0 +1,11 @@
+{% extends 'cuenta/validation.html' %}
+{% load static %}
+{% block paragraph%}
+<p>El usuario ha sido registrado exitosamente y ahora tiene la posibilidad de iniciar sesión para acceder y disfrutar de los beneficios otorgados a los proveedores.</p>
+{% endblock %}
+{% block reference %}
+<a href="{% url 'login' %}">Acceder al sistema</a>
+{% endblock %}
+{% block image %}
+<img src="{% static 'inicio/images/login/happy-box.png' %}" alt="">
+{% endblock %}

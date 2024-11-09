@@ -1,0 +1,1471 @@
+@import url('https://fonts.googleapis.com/css2?family=Biryani:wght@600&family=Nunito+Sans:ital,wght@0,700;1,400&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Biryani', sans-serif;
+}
+
+.header {
+    background-color: #2b4e71;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Encabezado fijo en la parte superior */
+    width: 100%; /* Ocupar el ancho completo de la pantalla */
+    top: 0; /* Pegado a la parte superior */
+    z-index: 1000;
+}
+
+.logo-img {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.logo-img img {
+    width: 60px; /* Nuevo tamaño de la imagen */
+    height: auto; /* Para mantener la proporción */
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.header .logo-img img:hover{
+    transform: scale(1.2);
+}
+
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+    display: flex; /* Hacer que los elementos <li> se comporten como flexbox */
+    align-items: center
+}
+
+.nav-links .icon{
+    width: 25px;
+    height: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a.clicked {
+    color: #dfac21; /* Color al dar clic */
+}
+
+.btn{
+    background-color: #ffffff;
+    color: #2b4e71;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn a{
+    text-decoration: none;
+    color: #2b4e71;
+}
+
+
+.menu-icon {
+    display: none;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* SECTIONS  */
+
+.zona-1,.zona-2,.zona-3,.zona-4,.zona-5,.zona-6{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('../images/home-images/background.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    background-attachment: fixed; /*Funcion para que la imagen de fondo quede estatica*/
+    background-repeat: no-repeat; /*No se repita el fondo en caso de quede cortado*/
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide el espacio en dos columnas iguales */
+    align-items: center; /* Centra verticalmente */
+    justify-items: center; /* Centra horizontalmente */
+    text-align: center;
+}
+
+
+.zona-1 .container {
+    max-width: 600px;
+}
+
+.zona-1 .container .image-zona-1{
+    width: 100%;
+}
+
+.zona-1 .txt-start {
+    max-width: 600px;
+}
+
+.zona-1 .txt-start h1{
+    font-size: 28px;
+}
+
+.zona-1 .txt-start p{
+    padding: 50px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.zona-1 .txt-start .button-send{
+    background-color: #2b4e71; /* Color azul */
+    border: none;
+    color: #ffffff;
+    padding: 13px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+}
+
+.zona-1 .txt-start .button-send:hover {
+    background-color: #2980b9; /* Color azul oscuro */
+}
+
+/* formulario modal */
+
+.container-modal{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    padding-top: 50px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.content-modal{
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #e8e8e8;
+    border-radius: 4px;
+}
+
+.content-modal .close-modal {
+    color: #aaa;
+    position: absolute;
+    margin-top: -27px;
+    margin-left: 360px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.content-modal .close-modal:hover,
+.content-modal .close-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.content-modal form p{
+    font-size: 13px;
+    padding: 15px 0px;
+}
+
+.content-modal form input{
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 6px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #b1b2b5;
+}
+.input-group {
+    display: flex;
+    gap: 10px; /* Espacio entre los inputs */
+    margin-bottom: 10px; /* Espacio entre el grupo y el siguiente input */
+}
+
+.image-form {
+    display: flex;
+    gap: 10px;
+    align-items: center; /* Alinea los elementos verticalmente en la parte superior */
+    margin-bottom: 10px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column; /* Los inputs se colocarán uno debajo del otro */
+}
+
+.input-container input {
+    width: 100%;
+    height: 40px;
+    padding: 5px 6px;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #b1b2b5;
+}
+
+.image-form img {
+    width: 180px;
+    height: auto;
+    margin: 0;
+}
+
+.content-modal textarea {
+    width: 100%;
+    height: 80px; /* Ajusta la altura según tus preferencias */
+    padding: 5px 6px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #b1b2b5;
+}
+
+.content-modal .btn-close{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: #2b4e71;
+    border: none;
+    color: #ffffff;
+    padding: 10px 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100px; /* Ajusta el ancho del botón */
+    height: 40px; /* Ajusta la altura del botón */
+    border-radius: 10px;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.content-modal .btn-close:hover {
+    background-color: #2980b9; /* Color azul oscuro */
+}
+
+
+/* SECTION 2  */
+
+.zona-2 .container-us{
+    width: 100%; /*Establece el ancho de un elemento*/
+    height: 100vh; /*Especifica la altura de un elemento*/
+    display: flex; /*Ayuda a colocar las cajas como si fueran celdas de tablas*/
+    justify-content: center; /*Define como el navegador distribuye el espacio entre y alrededor de los items*/
+    align-items: center; /*Cotra la alineación de todos los elementos en el eje transversal*/
+    overflow: hidden; /*Todo el contenido que sobre sale de su contenedor se oculte */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.zona-2 .container-us .image-us{
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    filter: grayscale(30%);
+}
+
+.zona-2 .txt-about-us {
+    max-width: 600px;
+}
+
+.zona-2 .txt-about-us h2{
+    padding: 5px;
+    color: black;
+    font-size: 28px;
+}
+
+.zona-2 .txt-about-us p{
+    padding: 5px;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: justify;
+}
+
+
+.zona-2 .txt-about-us .differences {
+    list-style: none;
+    font-size: 15px;
+    padding: 5px;
+    text-align: justify;
+}
+
+.zona-2 .txt-about-us .differences a{
+    text-decoration: none;
+    color: #ffffff;
+
+}
+/* SECTION 3  */
+
+
+.zona-3 .products{
+    max-width: 400px;
+}
+
+.zona-3 .products #image-carousel{
+    width: 100%;
+}
+
+.zona-3 .txt-products {
+    max-width: 600px;
+}
+
+.zona-3 .txt-products h2{
+    padding: 10px;
+    color: black;
+    font-size: 28px;
+}
+
+.zona-3 .txt-products .list-product{
+    /*Espaciaod de la parte de arriba*/
+    padding-top: 35px;
+    /*Quitar estilo a la litsa*/
+    list-style: none;
+}
+
+.zona-3 .txt-products .list-product li{
+    /*Quitar decoracion a etiquetas "a"*/
+    text-decoration: none;
+    /*Color del texto*/
+    color: #ffffff;
+    text-align: justify;
+    cursor: pointer;
+}
+
+
+
+.zona-3 .txt-products button {
+    display: inline-block;
+    background-color: #2b4e71; /* Color azul */
+    border: none;
+    color: #ffffff;
+    padding: 15px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-left: 7px;
+    
+}
+
+.zona-3 .txt-products button:hover {
+    background-color: #2980b9; /* Color azul oscuro */
+}
+
+
+/* SECTION 4  */
+
+.zona-4 .container-contact{
+    width: 100%; /*Establece el ancho de un elemento*/
+    height: 100vh; /*Especifica la altura de un elemento*/
+    display: flex; /*Ayuda a colocar las cajas como si fueran celdas de tablas*/
+    justify-content: center; /*Define como el navegador distribuye el espacio entre y alrededor de los items*/
+    align-items: center; /*Cotra la alineación de todos los elementos en el eje transversal*/
+    overflow: hidden; /*Todo el contenido que sobre sale de su contenedor se oculte */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.zona-4 .container-contact .image-contact{
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    filter: grayscale(30%);
+}
+
+.zona-4 .txt-need-help {
+    max-width: 600px;
+}
+
+.zona-4 .txt-need-help h2{
+    padding: 10px;
+    color: black;
+    font-size: 28px;
+}
+
+.zona-4 .txt-need-help p{
+    padding: 30px;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: justify;
+}
+
+.zona-4 .txt-need-help .button-contact button {
+    background-color: #2b4e71; /* Color azul */
+    border: none;
+    color: #ffffff;
+    padding: 15px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+}
+
+.zona-4 .txt-need-help .button-contact button:hover {
+    background-color: #2980b9; /* Color azul oscuro */
+}
+
+.zona-4 .txt-need-help .list-contact{
+    /*Espaciaod de la parte de arriba*/
+    padding-top: 35px;
+    /*Quitar estilo a la litsa*/
+    list-style: none;
+}
+
+.zona-4 .txt-need-help .list-contact li a{
+    /*Quitar decoracion a etiquetas "a"*/
+    text-decoration: none;
+    /*Color del texto*/
+    color: black;
+}
+
+/*SECTION 5*/
+
+.zona-5 .register{
+    width: 100%; /*Establece el ancho de un elemento*/
+    height: 100vh; /*Especifica la altura de un elemento*/
+    display: flex; /*Ayuda a colocar las cajas como si fueran celdas de tablas*/
+    justify-content: center; /*Define como el navegador distribuye el espacio entre y alrededor de los items*/
+    align-items: center; /*Cotra la alineación de todos los elementos en el eje transversal*/
+    overflow: hidden; /*Todo el contenido que sobre sale de su contenedor se oculte */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.zona-5 .register img{
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    filter: grayscale(30%);
+}
+
+.zona-5 .txt-register form{
+    position: absolute;
+    min-width: 280px;
+    max-width: 25%;
+    width: 25%;
+    top: 50%;
+    left: 50%;
+    transform: translate(50%,-50%);
+    padding: 15px;
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1rem);
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+.zona-5 .txt-register form h2{
+    position: relative;
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 7px;
+}
+
+.zona-5 .txt-register form input{
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 6px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+
+.zona-5 .txt-register form button{
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 40px;
+    background-color: #2b4e71;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.zona-5 .txt-register form .link-login{
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bolder;
+
+}
+
+.invalid {
+    background-color: #ffcccc; /* Cambia el color de fondo a rojo */
+}
+
+/* modal register  */
+
+
+.modal-register{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    padding-top: 50px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content-register{
+    background-color: #e8e8e8;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 4px;
+}
+
+.modal-content-register p {
+    font-size: 13px;
+    padding: 15px 0px;
+}
+
+.modal-content-register input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 6px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #b1b2b5;
+}
+.modal-content-register button {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 40px;
+    background-color: #2b4e71;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.modal-content-register .close-register {
+    color: #aaa;
+    position: absolute;
+    margin-top: -27px;
+    margin-left: 180px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content-register .close-register:hover,
+.modal-content-register .close-register:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*SECTION 6*/
+
+
+.zona-6 .login{
+    width: 100%; /*Establece el ancho de un elemento*/
+    height: 100vh; /*Especifica la altura de un elemento*/
+    display: flex; /*Ayuda a colocar las cajas como si fueran celdas de tablas*/
+    justify-content: center; /*Define como el navegador distribuye el espacio entre y alrededor de los items*/
+    align-items: center; /*Cotra la alineación de todos los elementos en el eje transversal*/
+    overflow: hidden; /*Todo el contenido que sobre sale de su contenedor se oculte */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.zona6 .login img{
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    filter: grayscale(30%);
+}
+
+.zona-6 .txt-login form{
+    position: absolute;
+    min-width: 280px;
+    max-width: 25%;
+    width: 25%;
+    top: 50%;
+    left: 50%;
+    transform: translate(50%,-50%);
+    padding: 15px;
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1rem);
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+
+.zona-6 .txt-login form h2{
+    position: relative;
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 7px;
+}
+
+.zona-6 .txt-login form input{
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 6px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+
+.zona-6 .txt-login form button{
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 40px;
+    background-color: #2b4e71;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.zona-6 .txt-login form .link-registro{
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bolder;
+}
+.zona-6 .txt-login form .link-password{
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+/* modal reset  */
+
+
+.modal-reset, .codigo-reset{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    padding-top: 50px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content-reset,.codigo-reset-content {
+    background-color: #e8e8e8;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 4px;
+}
+
+.modal-content-reset p, .codigo-reset-content p {
+    font-size: 13px;
+    padding: 15px 0px;
+}
+
+.modal-content-reset input, .codigo-reset-content input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 6px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #b1b2b5;
+}
+.modal-content-reset button, .codigo-reset-content button {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 40px;
+    background-color: #2b4e71;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.modal-content-reset .close-reset, .codigo-reset-content .close-codigo {
+    color: #aaa;
+    position: absolute;
+    margin-top: -27px;
+    margin-left: 180px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content-reset .close-reset:hover,
+.modal-content-reset .close-reset:focus,
+.codigo-reset-content .close-codigo:hover,
+.codigo-reset-content .close-codigo:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Zona 7 */
+.zona-7 {
+    width: 100%;
+    height: 100vh;
+    background: url('../images/home-images/background2.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.txt-codigo form {
+    min-width: 280px;
+    max-width: 25%;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    padding: 15px;
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.8);
+    background-color: rgba(112, 72, 72, 0.1);
+    backdrop-filter: blur(1rem);
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+.txt-codigo form h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 7px;
+}
+
+.txt-codigo form input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 6px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.txt-codigo form button {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 40px;
+    background-color: #2b4e71;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.txt-codigo p {
+    font-size: 13px;
+    padding: 5px 0px;
+    margin-bottom: 15px;
+}
+
+/* Zona 8 */
+
+.zona-8 {
+    width: 100%;
+    height: 100vh;
+    background-color: #C5AD99;
+    background-size: 100% 100%;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.txt-code-invalid {
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 70PX;
+}
+
+.txt-code-invalid p {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.txt-code-invalid img {
+    width: 100%;
+    max-width: 350px;
+    display: block;
+    margin: 20px auto;
+}
+
+.txt-code-invalid a {
+    text-decoration: none; 
+    color: #2b4e71;
+    font-size: 20px;
+}
+
+/* ---------------------------------------- Responsive ------------------------------------------- */
+@media only screen and (max-width: 1025px) {
+    
+    /* SECTIONS  */  
+    
+    .zona-1 .txt-start {
+        max-width: 450px;
+    }
+    
+    .zona-1 .txt-start h1{
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .zona-1 .txt-start p{
+        font-size: 15px;
+    }
+    
+    /* SECTION 2  */
+    
+    .zona-2 .txt-about-us {
+        max-width: 600px;
+        padding: 5px 20px;
+        padding-top: 30px;
+    }
+    
+    .zona-2 .txt-about-us p{
+        font-size: 13px;
+    }
+    
+    .zona-2 .txt-about-us h2{
+        font-size: 20px;
+    }
+    
+    .zona-2 .txt-about-us .differences {
+        font-size: 13px;
+    }
+
+    /* SECTION 3  */
+
+    .zona-3 .txt-products h2{
+        font-size: 20px;
+    }
+    
+    .zona-3 .txt-products .list-product{
+        padding-top: 20px;
+        margin-left: 45px;
+    }
+    
+    .zona-3 .txt-products .list-product li{
+        font-size: 15px;
+    }
+    
+    
+    
+    .zona-3 .txt-products button {
+        padding: 13px 13px;
+        font-size: 15px;
+        margin-left: 5px;
+    }
+    
+    
+    /* SECTION 4  */
+    
+    
+    .zona-4 .txt-need-help h2{
+        font-size: 20px;
+        padding-top: 50px;
+    }
+    
+    .zona-4 .txt-need-help p{
+        font-size: 13px;
+        padding: 5px 20px 30px;
+
+    }
+    
+    .zona-4 .txt-need-help .button-contact button {
+        padding: 12px 12px;
+        font-size: 15px;
+    }
+    
+    .zona-4 .txt-need-help .list-contact{
+        padding-top: 20px;
+        font-size: 13px;
+    }
+    
+}
+
+@media only screen and (max-width: 768px) {
+
+    .logo-img a {
+        font-size: 20px;
+    }
+    
+    .logo-img img {
+        width: 40px; /* Nuevo tamaño de la imagen */
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background-color: #2b4e71;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 10px;
+        text-align: center;
+    }
+
+    .nav-links li:hover a{
+        color: #0b7ed0; /* Color azul oscuro */
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    .nav-links .icon {
+        display: none;
+    }
+    
+    
+    /* SECTIONS  */  
+    
+    .zona-1 .container {
+        max-width: 300px;
+    }
+    
+    .zona-1 .txt-start {
+        max-width: 600px;
+    }
+    
+    .zona-1 .txt-start h1{
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .zona-1 .txt-start p{
+        font-size: 11px;
+    }
+    
+    .zona-1 .txt-start .button-send{
+        padding: 10px 10px;
+        font-size: 13px;
+    }
+    
+    /* formulario modal */
+    .container-modal{
+        padding-top: 30px;
+    }
+
+    .content-modal{
+        max-width: 200px;
+        padding: 10px;
+    }
+
+    .content-modal .close-modal {
+        margin-top: -20px;
+        margin-left: 170px;
+    }
+
+    .content-modal form p{
+        font-size: 9px;
+    }
+    
+    .content-modal form input{
+        height: 20px;
+    }
+    
+    .input-group input{
+        font-size: 8px;
+    }
+
+    .input-container input {
+        height: 20px;
+        font-size: 8px;
+    }
+    
+    .image-form img {
+        width: 100px;
+    }
+    
+    .content-modal textarea {
+        width: 100%;
+        height: 40px; /* Ajusta la altura según tus preferencias */
+        font-size: 9px;
+    }
+    
+    .content-modal .btn-close{
+        padding: 5px 5px;
+        font-size: 8px;
+        width: 50px; /* Ajusta el ancho del botón */
+        height: 20px; /* Ajusta la altura del botón */
+    }
+    
+    /* SECTION 2  */
+    
+    .zona-2 .txt-about-us {
+        max-width: 600px;
+        padding: 5px 20px;
+        padding-top: 30px;
+    }
+    
+    .zona-2 .txt-about-us p{
+        font-size: 9px;
+    }
+    
+    .zona-2 .txt-about-us h2{
+        font-size: 13px;
+    }
+    
+    .zona-2 .txt-about-us .differences {
+        font-size: 9px;
+    }
+
+    /* SECTION 3  */
+    
+    
+    .zona-3 .products{
+        max-width: 200px;
+    }
+    
+    .zona-3 .txt-products h2{
+
+        font-size: 15px;
+    }
+    
+    .zona-3 .txt-products .list-product{
+        padding-top: 20px;
+        margin-left: 45px;
+    }
+    
+    .zona-3 .txt-products .list-product li{
+        font-size: 10px;
+    }
+    
+    
+    
+    .zona-3 .txt-products button {
+        padding: 10px 10px;
+        font-size: 13px;
+        margin-left: 50px;
+    }
+    
+    
+    /* SECTION 4  */
+    
+    
+    .zona-4 .txt-need-help h2{
+        font-size: 15px;
+        padding-top: 50px;
+    }
+    
+    .zona-4 .txt-need-help p{
+        font-size: 9px;
+        padding: 5px 20px 30px;
+
+    }
+    
+    .zona-4 .txt-need-help .button-contact button {
+        padding: 10px 10px;
+        font-size: 13px;
+    }
+    
+    .zona-4 .txt-need-help .list-contact{
+        padding-top: 20px;
+        font-size: 9px;
+    }
+    
+    
+    /*SECTION 5*/
+    
+    
+    .zona-5 .txt-register form{
+        min-width: 150px;
+        top: 55%;
+    }
+    
+    .zona-5 .txt-register form h2{
+        font-size: 13px;
+    }
+    
+    .zona-5 .txt-register form input{
+        height: 25px;
+        font-size: 9px;
+    }
+    
+    
+    .zona-5 .txt-register form button{
+        height: 25px;
+        font-size: 13px;
+    }
+    
+    .zona-5 .txt-register form .link-login{
+        font-size: 9px;
+    
+    }
+    
+    /*SECTION 6*/
+    
+    .zona-6 .txt-login form{
+        min-width: 150px;
+    }
+    
+    
+    .zona-6 .txt-login form h2{
+        font-size: 13px;
+    }
+    
+    .zona-6 .txt-login form input{
+        height: 25px;
+        font-size: 9px;
+    }
+    
+    
+    .zona-6 .txt-login form button{
+        height: 25px;
+        font-size: 13px;
+    }
+    
+    .zona-6 .txt-login form .link-registro{
+        font-size: 9px;
+    }
+
+    .zona-6 .txt-login form .link-password{
+        font-size: 9px;
+    }
+
+    .modal-content-reset,.codigo-reset-content {
+        max-width: 300px;
+    }
+
+    .modal-content-reset p, .codigo-reset-content p {
+        font-size: 9px;
+        padding: 15px 0px;
+    }
+
+    .modal-content-reset input, .codigo-reset-content input {
+        height: 30px;
+        font-size: 10px;
+    }
+
+    .modal-content-reset button, .codigo-reset-content button {
+        height: 30px;
+        font-size: 10px;
+    }
+
+    .modal-content-reset .close-reset, .codigo-reset-content .close-codigo {
+        margin-top: -27px;
+        margin-left: 130px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+}
+
+@media only screen and (max-width: 376px){
+    .logo-img a {
+        font-size: 10px;
+    }
+    
+    .logo-img img {
+        width: 30px; /* Nuevo tamaño de la imagen */
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        background-color: #2b4e71;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 10px;
+        text-align: center;
+    }
+
+    .nav-links li:hover a{
+        color: #0b7ed0; /* Color azul oscuro */
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    .nav-links .icon {
+        display: none;
+    }
+    
+    
+    /* SECTIONS  */  
+    
+    .zona-1 .container {
+        display: none;
+    }
+    
+    .zona-1 .txt-start {
+        position: relative; /* Cambia la posición a relativa */
+        width: 100%; /* Ocupa el ancho completo */
+        max-width: 100%; /* Ajusta el ancho máximo al 100% */
+        transform: none; /* Elimina la transformación previa */
+        top: unset; /* Elimina la posición superior */
+        left: unset; /* Elimina la posición izquierda */
+        margin: auto; /* Centra horizontalmente */
+        text-align: center; /* Centra el contenido */
+        margin-left: 75px;
+    }
+    
+    .zona-1 .txt-start h1{
+        font-size: 15px;
+        color: #000000;
+    }
+    
+    .zona-1 .txt-start p{
+        font-size: 10px;
+    }
+    
+    .zona-1 .txt-start .button-send{
+        padding: 10px 10px;
+        font-size: 13px;
+    }
+    
+    /* SECTION 2  */
+    
+    .zona-2 .txt-about-us {
+        max-width: 600px;
+        padding: 5px 20px;
+        padding-top: 30px;
+    }
+    
+    .zona-2 .txt-about-us p{
+        font-size: 8px;
+    }
+    
+    .zona-2 .txt-about-us h2{
+        font-size: 12px;
+    }
+    
+    .zona-2 .txt-about-us .differences {
+        font-size: 8px;
+    }
+
+    /* SECTION 3  */
+    
+    
+    .zona-3 .products{
+        max-width: 200px;
+        margin: 5px;
+    }
+    
+    .zona-3 .txt-products h2{
+        font-size: 12px;
+    }
+    
+    .zona-3 .txt-products .list-product{
+        padding-top: 20px;
+        margin-left: 30px;
+        margin-right: 5px;
+    }
+    
+    .zona-3 .txt-products .list-product li{
+        font-size: 8px;
+    }
+    
+    
+    
+    .zona-3 .txt-products button {
+        padding: 10px 10px;
+        font-size: 10px;
+        margin-left: 30px;
+    }
+    
+    
+    /* SECTION 4  */
+    
+    
+    .zona-4 .txt-need-help h2{
+        font-size: 12px;
+        padding-top: 50px;
+    }
+    
+    .zona-4 .txt-need-help p{
+        font-size: 8px;
+        padding: 5px 20px 30px;
+
+    }
+    
+    .zona-4 .txt-need-help .button-contact button {
+        padding: 10px 10px;
+        font-size: 10px;
+    }
+    
+    .zona-4 .txt-need-help .list-contact{
+        padding-top: 20px;
+        font-size: 9px;
+    }
+    
+    
+    /*SECTION 5*/
+
+    .zona-5 .register{
+        display: none;
+    }
+
+    .zona-5 .txt-register form{
+        position: relative; /* Cambia la posición a relativa */
+        width: 100%; /* Ocupa el ancho completo */
+        max-width: 100%; /* Ajusta el ancho máximo al 100% */
+        transform: none; /* Elimina la transformación previa */
+        top: unset; /* Elimina la posición superior */
+        left: unset; /* Elimina la posición izquierda */
+        margin: auto; /* Centra horizontalmente */
+        text-align: center; /* Centra el contenido */
+        margin-left: 65px;
+    }
+    
+    .zona-5 .txt-register form h2{
+        font-size: 13px;
+    }
+    
+    .zona-5 .txt-register form input{
+        height: 25px;
+        font-size: 9px;
+    }
+    
+    
+    .zona-5 .txt-register form button{
+        height: 25px;
+        font-size: 13px;
+    }
+    
+    .zona-5 .txt-register form .link-login{
+        font-size: 9px;
+    
+    }
+    
+    /*SECTION 6*/
+    
+    .zona-6 .login{
+        display: none;
+    }
+
+    .zona-6 .txt-login form{
+        position: relative; /* Cambia la posición a relativa */
+        width: 100%; /* Ocupa el ancho completo */
+        max-width: 100%; /* Ajusta el ancho máximo al 100% */
+        transform: none; /* Elimina la transformación previa */
+        top: unset; /* Elimina la posición superior */
+        left: unset; /* Elimina la posición izquierda */
+        margin: auto; /* Centra horizontalmente */
+        text-align: center; /* Centra el contenido */
+        margin-left: 75px;
+    }
+    
+    
+    .zona-6 .txt-login form h2{
+        font-size: 13px;
+    }
+    
+    .zona-6 .txt-login form input{
+        height: 25px;
+        font-size: 9px;
+    }
+    
+    
+    .zona-6 .txt-login form button{
+        height: 25px;
+        font-size: 13px;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

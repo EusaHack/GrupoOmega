@@ -1,0 +1,22 @@
+{% extends 'cuenta/base.html' %}
+{% load static %}
+{% block section %}
+<section class="zona-5">
+    <div class="register">
+        <img src="{% static 'inicio/images/login/background-1.jpg' %}" alt="">
+    </div>
+    <div class="txt-register">
+        <form id="formAuth" method="post" action="{% url 'authorizationUser' %}">
+            {% csrf_token %}
+            <h2>Registro</h2>
+            <input type="text" name="bussines_auth" placeholder="Nombre de la empresa">
+            <input type="email" name="email_auth" placeholder="Ingrese su correo">
+            <button type="button" id="envCode">Aprobación</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'cuenta/js/script-codeAuth.js' %}"></script>
+{% endblock %}
