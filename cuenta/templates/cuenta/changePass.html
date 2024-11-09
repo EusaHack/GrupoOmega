@@ -1,0 +1,11 @@
+{% extends 'cuenta/validation.html' %}
+{% load static %}
+{% block paragraph%}
+<p>¡La contraseña se ha actualizado! Por favor, regrese al inicio para iniciar sesión con su usuario.</p>
+{% endblock %}
+{% block reference %}
+<a href="{% url 'user_dashboard' %}">Acceder al sistema</a>
+{% endblock %}
+{% block image %}
+<img src="{% static 'inicio/images/login/happy-box.png' %}" alt="">
+{% endblock %}

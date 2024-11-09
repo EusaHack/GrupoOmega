@@ -13,5 +13,8 @@ urlpatterns = [
     path('dashboard/', usuario_dashboard_admin.as_view(), name='usuario_dashboard_admin'),
     path('dashboard_inicio/', DashBoardView.as_view(), name='dashboard_inicio'),
     path('modificaciones/', ModifView.as_view(), name='modificaciones'),
+    path('reset/', views.reset_password, name="reset_password"),
+    path('ResetPassword/', views.validar_numero, name="validar_numero"),
+    path('change_password/', views.change_password, name="change_password"),
     path('logout/', views.salir, name="salir"),
 ]

@@ -22,7 +22,7 @@
     <div class="modal-reset" id="modal-reset">
         <div class="modal-content-reset">
             <span class="close-reset" onclick="closeModalReset()">&times;</span>
-            <form id="myform" method="post" action="">
+            <form id="myform" method="post" action="{% url 'reset_password' %}">
                 {% csrf_token %}
                 <p>Ingrese su correo electrónico para recibir el código de restablecimiento.</p>
                 <input type="text" placeholder="Ingrese su correo" name="date_email">

@@ -1,0 +1,19 @@
+{% extends 'cuenta/base.html' %}
+{% load static %}
+{% block section %}
+<section class="zona-7">
+        <div class="txt-codigo">
+            <form id="myform" action="{% url 'change_password' %}" method="post">
+                {% csrf_token %}
+                <h2>Cambio de Contraseña</h2>
+                <p>Introduzca su nueva contraseña</p>
+                <input type="password" id='passInput' name="passChange" placeholder="Ingrese la contrasena">
+                <input type="password" id='confirmedPassInput' placeholder="Confirme contrasena">
+                <button type="button" id="enviarBtn">Cambiar contraseña</button>
+            </form>
+        </div>
+</section>
+{% endblock %}
+{% block script %}
+<script src="{% static 'cuenta/js/validation-password.js' %}"></script>
+{% endblock %}

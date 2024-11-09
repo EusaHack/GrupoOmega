@@ -1,0 +1,15 @@
+{% extends 'cuenta/base.html' %}
+{% load static %}
+{% block section %}
+<section class="zona-7">
+        <div class="txt-codigo">
+            <form id="myform" action="{% url 'validar_numero' %}" method="post">
+                {% csrf_token %}
+                <h2>Cambio de Contraseña</h2>
+                <p>Ingrese el código enviado.</p>
+                <input type="text" name="validate_data" maxlength="4">
+                <button type="submit">Validar Código</button>
+            </form>
+        </div>
+</section>
+{% endblock %}

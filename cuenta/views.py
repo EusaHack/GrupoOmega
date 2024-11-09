@@ -84,3 +84,44 @@ def create_new_user(request):
         return render(request, 'cuenta/succes.html')
     else:
         raise Http404("Página no encontrada")
+    
+def reset_password(request):
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        global email_reset
+        email_reset = request.POST['date_email']
+        email_user = CustomUser.objects.filter(email=email_reset).first()
+        
+        if email_reset == "" or email_reset.isspace():
+            return render(request, 'cuenta/login.html')
+        
+        if email_user:
+            if action == 'numero':
+                global numero_random_reset
+                numero_random_reset = functions_x.generador_numero()
+                functions_x.envio_correo(numero_random_reset,email_reset)
+                return render(request, 'cuenta/reset.html')
+        else:
+            return render(request, 'cuenta/emailDoesNotExist.html')
+    else:
+        raise Http404("Página no encontrada")
+    
+def validar_numero(request):
+    if request.method == 'POST':
+        data_number = request.POST.get('validate_data')
+        if numero_random_reset == int(data_number):
+            return render(request, 'cuenta/resetUser.html')
+        else:
+            return render(request, 'cuenta/codeInvalid.html')
+    else:
+        raise Http404("Página no encontrada")
+    
+def change_password(request):
+    if request.method == 'POST':
+        pass_change = request.POST.get('passChange')
+        user = get_object_or_404(CustomUser, email=email_reset)
+        user.password = make_password(pass_change)
+        user.save()
+        return render(request, 'cuenta/changePass.html')
+    else:
+        raise Http404("Página no encontrada")

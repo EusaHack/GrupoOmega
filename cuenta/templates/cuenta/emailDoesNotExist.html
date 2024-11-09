@@ -1,0 +1,12 @@
+{% extends 'cuenta/validation.html' %}
+{% load static %}
+{% block paragraph%}
+<p>El correo ingresado no existe. Le recomendamos que se ponga en contacto con el administrador para obtener 
+asistencia adicional y resolver esta situación. Agradecemos su comprensión y paciencia en este asunto.</p>
+{% endblock %}
+{% block reference %}
+<a href="/">Ir a la página de inicio</a>
+{% endblock %}
+{% block image %}
+<img src="{% static 'inicio/images/login/scared-box.png' %}" alt="">
+{% endblock %}
