@@ -36,31 +36,59 @@
     <!-- ventana emergente -->
     <div id="modal" class="container-modal">
         <div class="content-modal">
-            <form>
+            <form method="post" id="form-cotizacion" onsubmit="mostrarMensajeEnviado(event)">
+                {% csrf_token %}
                 <span class="close-modal" onclick="closeModalWindow()">&times;</span>
                 <p>Cuéntanos sobre tus necesidades para poder
                     brindarte la solución que mejor se adapte
                     a tus requerimientos.</p>
                 <div class="input-group">
-                    <input type="text" placeholder="Producto">
-                    <input type="text" placeholder="Cantidad">
+                    <!--<input type="text" name="producto" placeholder="Producto">-->
+                    <select name="producto" id="producto" required>
+                        <option value="" disabled selected hidden>Selecciona un producto</option>
+                        <option value="Cajas usos múltiples">Cajas usos múltiples</option>
+                        <option value="Cajas para envíos">Cajas para envíos</option>
+                        <option value="Cajas para archivo">Cajas para archivo</option>
+                        <option value="Contenedores cerrados">Contenedores cerrados</option>
+                        <option value="Contenedores calados">Contenedores calados</option>
+                        <option value="Cartón corrugado">Cartón corrugado</option>
+                        <option value="Esquineros">Esquineros</option>
+                    </select>
+                    <input type="number" name="cantidad" id="cantidad" placeholder="Cantidad en piezas" required step="1">
                 </div>
                 <div class="image-form">
                     <div class="input-container">
-                        <input type="text" placeholder="Ciudad">
-                        <input type="text" placeholder="Nombre">
-                        <input type="email" placeholder="Correo">
-                        <input type="tel" placeholder="Telefono">
-                        <input type="text" placeholder="Empresa">
+                        <input type="text" name="ciudad" placeholder="Ciudad" required>
+                        <input type="text" name="nombre" placeholder="Nombre" required>
+                        <input type="email" name="correo" placeholder="Correo" required>
+                        <input type="tel" name="telefono" placeholder="Telefono" required>
+                        <input type="text" name="empresa" placeholder="Empresa" required>
                     </div>
                     <img src="{% static 'inicio/images/home-images/box.png' %}" alt="Imagen">
                 </div>
 
-                <textarea placeholder="mensaje"></textarea>
+                <textarea name="mensaje" placeholder="observaciones adicionales" required></textarea>
+                <button class="btn-close">Enviar</button>
             </form>
-            <button class="btn-close">Enviar</button>
         </div>
-    </div>    
+    </div>
+    <div id="mensaje-modal" style="display: none;">
+        <div class="modal-content">
+            <p>¡Cotización enviada con éxito!</p>
+            <button onclick="cerrarMensaje()">Cerrar</button>
+        </div>
+    </div>
+    <script>
+        function mostrarMensajeEnviado(event) {
+            event.preventDefault();
+            document.getElementById("mensaje-modal").style.display = "flex";
+            event.target.submit();
+        }
+
+        function cerrarMensaje() {
+            document.getElementById("mensaje-modal").style.display = "none";
+        }
+    </script>    
     <script>
         BASE_IMAGE_URL = "{% static 'inicio/images/carousel/' %}";
     </script>

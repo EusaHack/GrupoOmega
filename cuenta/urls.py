@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import usuario_dashboard_admin,DashBoardView,ModifView
+from .views import *
 
 
 urlpatterns = [
