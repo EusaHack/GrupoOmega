@@ -126,6 +126,7 @@
 
 .zona-1 .txt-start h1{
     font-size: 28px;
+    color: #2b4e71;
 }
 
 .zona-1 .txt-start p{
@@ -352,7 +353,7 @@
 
 .zona-2 .txt-about-us h2{
     padding: 5px;
-    color: black;
+    color: #2b4e71;
     font-size: 28px;
 }
 
@@ -393,7 +394,7 @@
 
 .zona-3 .txt-products h2{
     padding: 10px;
-    color: black;
+    color: #2b4e71;
     font-size: 28px;
 }
 
@@ -461,44 +462,45 @@
 
 .zona-4 .txt-need-help h2{
     padding: 10px;
-    color: black;
+    color: #2b4e71;
     font-size: 28px;
 }
 
 .zona-4 .txt-need-help p{
-    padding: 30px;
+    padding: 10px;
     color: #ffffff;
     font-size: 15px;
     text-align: justify;
 }
 
-.zona-4 .txt-need-help .button-contact button {
+.zona-4 .txt-need-help  button {
     background-color: #2b4e71; /* Color azul */
     border: none;
     color: #ffffff;
-    padding: 15px 20px;
+    padding: 10px 20px;
     font-size: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
     border-radius: 10px;
 }
 
-.zona-4 .txt-need-help .button-contact button:hover {
+.zona-4 .txt-need-help button:hover {
     background-color: #2980b9; /* Color azul oscuro */
 }
 
-.zona-4 .txt-need-help .list-contact{
-    /*Espaciaod de la parte de arriba*/
-    padding-top: 35px;
-    /*Quitar estilo a la litsa*/
-    list-style: none;
+.social-icons {
+    margin-top: 10px;
 }
 
-.zona-4 .txt-need-help .list-contact li a{
-    /*Quitar decoracion a etiquetas "a"*/
+.social-icons a {
+    color: #333;
+    font-size: 2rem;
+    margin-right: 10px;
     text-decoration: none;
-    /*Color del texto*/
-    color: black;
+}
+
+.social-icons a:hover {
+    color: #007bff; /* Cambia el color al pasar el mouse, si lo deseas */
 }
 
 /*SECTION 5*/

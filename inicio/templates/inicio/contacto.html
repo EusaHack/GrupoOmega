@@ -1,21 +1,26 @@
 {% extends 'inicio/base.html' %}
 {% load static %}
 {% block section %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <section class="zona-4">
     <div class="container-contact">
         <img class="image-contact" src="{% static 'inicio/images/home-images/need-help.jpg' %}" alt="">
     </div>
     <div class="txt-need-help">
         <h2>¿Necesitas Ayuda?</h2>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur.</p>
-        <a href="" class="button-contact"><button>Contáctanos</button></a>
-        <ul class="list-contact">
-            <li><a href="">Teléfono:55 6677 8899</a></li>
-            <li><a href="">Email: omega@gmail.com</a></li>
-        </ul>
+        <p>¿Tienes preguntas o requieres asistencia con nuestros productos de cartón? Estamos aquí para ayudarte. 
+            Nuestro equipo de atención al cliente está disponible para brindarte toda la información y el soporte que necesitas. 
+            ¡Contáctanos y encontraremos la solución ideal para tus necesidades de embalaje!.</p>
+        <button onclick="openModalForm()">Contáctanos</button>
+        <!-- Íconos de redes sociales -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61554956206085" target="_blank" class="icon-facebook" aria-label="Facebook">
+                <i class="fab fa-facebook-square"></i>
+            </a>
+            <a href="https://wa.me/5566778899" target="_blank" class="icon-whatsapp" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp-square"></i>
+            </a>
+        </div>
     </div>
 </section>
 {% endblock %}

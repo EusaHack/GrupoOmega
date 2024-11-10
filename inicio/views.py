@@ -19,9 +19,38 @@ class index(TemplateView):
         functions.aviso_cotizacion(producto,cantidad,ciudad,nombre,correo,telefono,empresa,mensaje)
         functions.enviar_correo(producto,cantidad,ciudad,nombre,correo,telefono,empresa,mensaje)
         return render(request, self.template_name)
+
 def nosotros(request):
     return render(request, "inicio/nosotros.html")
-def productos(request):
-    return render(request, "inicio/productos.html")
-def contacto(request):
-    return render(request, "inicio/contacto.html")
+
+class productos(TemplateView):
+    template_name = "inicio/productos.html"
+    
+    def post(self, request, *args, **kwargs):
+        producto = request.POST.get("producto")
+        cantidad = request.POST.get("cantidad")
+        ciudad = request.POST.get("ciudad")
+        nombre = request.POST.get("nombre")
+        correo = request.POST.get("correo")
+        telefono = request.POST.get("telefono")
+        empresa = request.POST.get("empresa")
+        mensaje = request.POST.get("mensaje")
+        functions.aviso_cotizacion(producto,cantidad,ciudad,nombre,correo,telefono,empresa,mensaje)
+        functions.enviar_correo(producto,cantidad,ciudad,nombre,correo,telefono,empresa,mensaje)
+        return render(request, self.template_name)
+
+class contacto(TemplateView):
+    template_name = "inicio/contacto.html"
+    
+    def post(self, request, *args, **kwargs):
+        producto = request.POST.get("producto")
+        cantidad = request.POST.get("cantidad")
+        ciudad = request.POST.get("ciudad")
+        nombre = request.POST.get("nombre")
+        correo = request.POST.get("correo")
+        telefono = request.POST.get("telefono")
+        empresa = request.POST.get("empresa")
+        mensaje = request.POST.get("mensaje")
+        functions.aviso_cotizacion(producto,cantidad,ciudad,nombre,correo,telefono,empresa,mensaje)
+        functions.enviar_correo(producto,cantidad,ciudad,nombre,correo,telefono,empresa,mensaje)
+        return render(request, self.template_name)
