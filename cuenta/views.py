@@ -4,12 +4,13 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.hashers import make_password
 from django.http import Http404
 from django.contrib.auth import logout,get_user_model,login
-from .models import CustomUser
+from .models import CustomUser,Producto,Pedido
 from . import functions_x
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import TemplateView
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import PedidoForm
 
 # Create your views here.
 
@@ -25,10 +26,54 @@ def usuario_dashboard(request):
     if request.user.is_superuser:
         return redirect(reverse('usuario_dashboard_admin'))
     else:
-        return render(request, 'cuenta/user.html')
+        return redirect(reverse('user_dashboard_user'))
+    
+
+class usuario_dashboard_no_admin(LoginRequiredMixin,TemplateView):
+    template_name = 'cuenta/user.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['username'] = self.request.user.username
+        return context
+
+class usuario_pedidos(LoginRequiredMixin,TemplateView):
+    template_name = 'cuenta/user-pedidos.html'
+    
+    def get(self, request, *args, **kwargs):
+        pedidos = Pedido.objects.filter(usuario=request.user)
+        form = PedidoForm()
+        return render(request, self.template_name, {'form': form, 'pedidos': pedidos})
+    
+    def post(self, request, *args, **kwargs):
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            
+            pedido = form.save(commit=False)
+            pedido.usuario = request.user
+            pedido.save()
+            
+            producto = pedido.producto
+            producto.stock -= pedido.cantidad
+            producto.save()
+            
+            form = PedidoForm()
+            
+            pedidos = Pedido.objects.filter(usuario=request.user)
+            
+            return render(request, self.template_name,{'form': form, 'pedidos': pedidos})
+        
+        return render(request, self.template_name, {'form': form, 'pedidos': pedidos})
+
+    
 
 class usuario_dashboard_admin(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['username'] = self.request.user.username
+        return context
 
 class DashBoardView(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin-d.html'

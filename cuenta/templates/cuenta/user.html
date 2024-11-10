@@ -11,19 +11,24 @@
     <div class="menu-content">
         <h2>Menú</h2>
         <ul>
-            <li><a href="">Inicio</a></li>
-            <li><a href="">Pedidos</a></li>
+            <li><a href="{% url 'user_dashboard_user' %}">Inicio</a></li>
+            <li><a href="{% url 'orders_user' %}">Pedidos</a></li>
+            <li><a href="">Perfil</a></li>
         </ul>
     </div>
 {% endblock %}
 
 {% block dashboard %}
     <section class="dashboard">
-        <h2>Bienvenido!</h2>
-        <p>Bienvenido al panel de usuario. Aquí encontrarás información importante.</p>
-        <form action="" method="post">
-        {% csrf_token %}
-            <input type="submit" value="Abrir Prueba Mensaje">
-        </form>
+        <div class="info-dashboard-user">
+            <h2>Bienvenido {{ username }}!</h2>
+            <h3>Nos alegra tenerte aquí. En este panel podrás acceder fácilmente a las herramientas y opciones que necesitas:</h3>
+            <p>* Inicio: Regresa al panel principal para ver todas tus opciones de un vistazo.</p>
+            <p>* Perfil: Revisa y actualiza tu información personal y las configuraciones de tu cuenta.</p>
+            <p>* Pedidos: Consulta el historial de tus pedidos y su estado, y realiza seguimiento a tus compras.</p>
+        </div>
+        <div class="img-dashboard-user">
+            <img src="{% static 'inicio/images/login/happy-box.png' %}" alt="Imagen dashboard">
+        </div>
     </section>
 {% endblock %}

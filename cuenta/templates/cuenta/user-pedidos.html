@@ -1,0 +1,91 @@
+{% extends 'cuenta/baseDashboard.html' %}
+{% load static %}
+
+{% block avatar %}
+    <div class="user-avatar">
+        <img class="user-avatar" src="{% static 'inicio/images/avatar/admin.jfif' %}" alt="Imagen de usuario">
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <div class="menu-content">
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="{% url 'user_dashboard_user' %}">Inicio</a></li>
+            <li><a href="{% url 'orders_user' %}">Pedidos</a></li>
+            <li><a href="">Perfil</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block dashboard %}
+    <style>
+        .pedido-dashboard-user {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0px;
+        }
+        th, td {
+            padding: 4px 6px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <section class="dashboard">
+        <h2>Mis Pedidos</h2>
+        <div class="pedido-dashboard-user">
+            {% if pedidos %}
+                <table class="table">
+                <thead>
+                    <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Fecha del Pedido</th>
+                    <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                    <tr>
+                        <td>{{ pedido.producto.nombre }}</td>
+                        <td>{{ pedido.cantidad }}</td>
+                        <td>{{ pedido.total }}</td>
+                        <td>{{ pedido.fecha_pedido }}</td>
+                        <td>{{ pedido.estado_entrega }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            {% else %}
+                <p>No tienes pedidos.</p>
+            {% endif %}
+        </div>
+        <div class="form-pedido">
+            <div class="form-pedido-datos">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.producto.id_for_label }}">Producto :</label>
+                        {{ form.producto }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.cantidad.id_for_label }}">Cantidad :</label>
+                        {{ form.cantidad }}
+                    </div>
+                    <button type="submit">Realizar Pedido</button>
+                </form>
+            </div>
+            <div class="img-dashboard-pedido">
+                <img src="{% static 'inicio/images/login/Designer.jpeg' %}" alt="Imagen dashboard">
+            </div>
+        </div>
+    </section>
+{% endblock %}

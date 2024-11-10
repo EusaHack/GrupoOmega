@@ -38,3 +38,37 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+
+# Modelo de Producto
+class Producto(models.Model):
+    nombre = models.CharField(max_length=255)
+    descripcion = models.TextField()
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    stock = models.IntegerField()
+
+    def __str__(self):
+        return self.nombre
+    
+# Modelo de Pedido
+class Pedido(models.Model):
+    ESTADO_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('entregado', 'Entregado'),
+        ('cancelado', 'Cancelado')
+    ]
+    
+    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    fecha_pedido = models.DateTimeField(auto_now_add=True)
+    estado_entrega = models.CharField(
+        max_length=10, choices=ESTADO_CHOICES, default='pendiente'
+    )
+
+    def __str__(self):
+        return f"Pedido de {self.usuario.username} para {self.producto.nombre}"
+
+    def total(self):
+        return self.cantidad * self.producto.precio
+
+

@@ -279,3 +279,81 @@ textarea {
     margin-left: 90px; /* Empuja los siguientes elementos hacia la derecha */
 }
 
+.info-dashboard-user h2{
+    color: #2b4e71;
+}
+
+.info-dashboard-user h3{
+    color: #2b4e71;
+}
+
+.info-dashboard-user p{
+    color: #2b4e71;
+}
+
+.img-dashboard-user {
+    flex: 1; /* Toma el espacio disponible */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente la imagen */
+    align-items: center; /* Centra verticalmente la imagen */
+}
+
+.img-dashboard-user img {
+    width: 50%; /* Ajusta el tamaño de la imagen */
+    max-width: 400px; /* Tamaño máximo para evitar que se agrande demasiado en pantallas grandes */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+
+.img-dashboard-pedido {
+    display: flex;
+    justify-content: flex-end; /* Alinea la imagen a la derecha */
+    align-items: center; /* Centra la imagen verticalmente */
+}
+
+.img-dashboard-pedido img {
+    width: 50%; /* Ajusta el tamaño de la imagen */
+    max-width: 400px; /* Tamaño máximo para evitar que se agrande demasiado en pantallas grandes */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+
+.form-pedido {
+    margin: 40px 0px;
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Añadir espacio entre los elementos */
+}
+
+form .form-group label {
+    font-weight: bold;         /* Hace que las etiquetas sean más prominentes */
+    font-size: 1.1rem;         /* Tamaño de fuente más grande */
+    margin-bottom: 0.5rem;     /* Espacio debajo de las etiquetas */
+    color: #2b4e71;            /* Color de texto de las etiquetas */
+}
+
+/* Estilo para los inputs */
+form .form-group input,
+form .form-group select {
+    width: 100%;               /* Usa el 100% del ancho disponible */
+    max-width: 300px;          /* O un tamaño máximo para evitar que se agranden demasiado */
+    padding: 0.2rem;           /* Aumenta el espaciado dentro del campo */
+    margin-bottom: 1rem;       /* Espacio debajo de cada input */
+    border: 1px solid #ccc;    /* Borde gris */
+    border-radius: 10px;       /* Bordes redondeados */
+    font-size: 15px; 
+}
+
+/* Estilo para el botón de envío */
+form button {
+    padding: 5px 10px;        /* Relleno del botón */
+    background-color: #2b4e71; /* Color de fondo */
+    color: white;              /* Color del texto */
+    border: none;              /* Sin borde */
+    border-radius: 10px;        /* Bordes redondeados */
+    cursor: pointer;           /* Cambia el cursor cuando pasa sobre el botón */
+    font-size: 15px;           /* Tamaño de la fuente */
+}
+
+
+form button:hover {
+    background-color: #2980b9; /* Cambia el color del botón cuando pasa el ratón */
+}
