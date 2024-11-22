@@ -1,0 +1,85 @@
+{% extends 'cuenta/baseDashboard.html' %}
+{% load static %}
+
+{% block avatar %}
+    <div class="user-avatar">
+        <img class="user-avatar" src="{% static 'inicio/images/avatar/admin.jfif' %}" alt="Imagen de usuario">
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <div class="menu-content">
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="{% url 'user_dashboard_user' %}">Inicio</a></li>
+            <li><a href="{% url 'orders_user' %}">Pedidos</a></li>
+            <li><a href="{% url 'perfil_user' %}">Perfil</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block dashboard %}
+    <section class="dashboard">
+        <div class="img-dashboard-perfil">
+            <div class="image-container-perfil">
+                <img class="user-avatar-perfil" src="{% static 'inicio/images/avatar/admin.jfif' %}" alt="Imagen de usuario">
+                <div class="edit-overlay-perfil">
+                    <button class="edit-button-perfil">Editar</button>
+                </div>
+            </div>
+        </div>
+        <div class="user-info">
+            <form id="username-form" method="post" action="{% url 'perfil_user' %}">
+                {% csrf_token %}
+                <h3>Nombre de usuario</h3>
+                <div class="editable-field">
+                    <input type="text" id="username" class="editable" value="{{ username }}">
+                    <button class="edit-btn" data-field="username">Guardar</button>
+                </div>
+                <h3>Dirección de correo electrónico</h3>
+                <div class="editable-field">
+                    <input type="email" id="email" class="editable" value="{{ email }}">
+                    <button class="edit-btn" data-field="email">Guardar</button>
+                </div>
+                <h3>Número de teléfono</h3>
+                <div class="editable-field">
+                    <input type="tel" id="number" class="editable" value="{{ number }}">
+                    <button class="edit-btn" data-field="number">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script>
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();  // Prevenir el envío del formulario por defecto
+
+                const field = this.getAttribute('data-field');  // Obtener el campo que estamos editando (username, email, number)
+                const fieldValue = document.getElementById(field).value;
+                const csrfToken = document.querySelector('[name="csrfmiddlewaretoken"]').value;
+
+                // Enviar una solicitud AJAX para actualizar el campo
+                fetch("{% url 'perfil_user' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest'  // Encabezado AJAX
+                    },
+                    body: `csrfmiddlewaretoken=${csrfToken}&${field}=${fieldValue}`  // Enviar el valor del campo
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`${field.charAt(0).toUpperCase() + field.slice(1)} actualizado correctamente.`);
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al actualizar el ' + field + '.');
+                });
+            });
+        });
+    </script>
+{% endblock %}

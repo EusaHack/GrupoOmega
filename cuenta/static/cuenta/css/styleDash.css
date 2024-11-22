@@ -357,3 +357,116 @@ form button {
 form button:hover {
     background-color: #2980b9; /* Cambia el color del botón cuando pasa el ratón */
 }
+
+
+.img-dashboard-perfil .image-container-perfil {
+    position: relative;
+    width: 150px; /* Ajusta el tamaño según sea necesario */
+    height: 150px;
+    margin: 0 auto;
+}
+
+.user-avatar-perfil {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Hace la imagen circular */
+    object-fit: cover; /* Ajusta la imagen al contenedor circular */
+    border: 3px solid #ccc; /* Opcional: borde decorativo */
+}
+
+.edit-overlay-perfil {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Oscurece la imagen */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-container-perfil:hover .edit-overlay-perfil {
+    opacity: 1;
+}
+
+.edit-button-perfil {
+    background-color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.edit-button-perfil:hover {
+    background-color: #2b4e71;
+    color: #fff;
+}
+
+
+.user-info {
+    width: 300px; /* Ajusta el tamaño según sea necesario */
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ccc; /* Borde opcional */
+    border-radius: 10px; /* Esquinas redondeadas */
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.user-info h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.editable-field {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.editable {
+    font-size: 14px;
+    color: #555;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 65%; /* Ajusta el ancho según sea necesario */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.editable:focus {
+    outline: none;
+    border-color: #007bff; /* Borde visible al enfocar */
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Resalta el campo enfocado */
+}
+
+.edit-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Efecto de ligero zoom */
+}
+
+.edit-btn:active {
+    background-color: #004085;
+    transform: scale(1); /* Volver al tamaño original */
+}

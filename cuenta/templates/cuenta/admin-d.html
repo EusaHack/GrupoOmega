@@ -12,19 +12,47 @@
         <h2>Menú</h2>
         <ul>
             <li><a href="{% url 'dashboard_inicio' %}">Dashboard</a></li>
-            <li><a href="#">Productos</a></li>
+            <li><a href="{% url 'pedidos_admin' %}">Productos</a></li>
             <li><a href="#">Pedidos</a></li>
             <li><a href="#">Facturas</a></li>
             <li><a href="#">Clientes</a></li>
-            <li><a href="{% url 'modificaciones' %}">Modificaciones</a></li>
+            <li><a href="{% url 'modificaciones' %}">Configuraciones</a></li>
         </ul>
     </div>
 {% endblock %}
 
 {% block dashboard %}
     <section class="dashboard">
-        <h2>Dashboard</h2>
-        <p>¡Bienvenido al dashboard! Por favor, elige la opción que desees explorar.</p>
-        <button>Cambiar</button>
+        <h1>Dashboard de Estadísticas</h1>
     </section>
+    <canvas id="ventasChart" width="400" height="200"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('ventasChart').getContext('2d');
+
+        // Datos proporcionados por la vista de Django
+        const productos = {{ productos_nombres|safe }};
+        const cantidades = {{ cantidades_por_producto|safe }};
+
+        const ventasChart = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico
+            data: {
+                labels: productos, // Etiquetas (nombres de los productos)
+                datasets: [{
+                    label: 'Ventas por Producto',
+                    data: cantidades, // Datos de ventas
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 {% endblock %}

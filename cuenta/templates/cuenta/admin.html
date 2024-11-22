@@ -12,19 +12,29 @@
         <h2>Menú</h2>
         <ul>
             <li><a href="{% url 'dashboard_inicio' %}">Dashboard</a></li>
-            <li><a href="#">Productos</a></li>
+            <li><a href="{% url 'pedidos_admin' %}">Productos</a></li>
             <li><a href="#">Pedidos</a></li>
             <li><a href="#">Facturas</a></li>
-            <li><a href="#">Clientes</a></li>
-            <li><a href="{% url 'modificaciones' %}">Modificaciones</a></li>
+            <li><a href="#">Usuarios</a></li>
+            <li><a href="{% url 'modificaciones' %}">Configuraciones</a></li>
         </ul>
     </div>
 {% endblock %}
 
 {% block dashboard %}
     <section class="dashboard">
-        <h2>Bienvenido, {{ username }}!</h2>
-        <p>¡Bienvenido al dashboard! Por favor, elige la opción que desees explorar.</p>
-        <button>Cambiar</button>
+        <div class="info-dashboard-user">
+            <h2>Bienvenido Administrador {{ username }}!</h2>
+            <h3>Nos alegra tenerte aquí. Como administrador, podrás gestionar fácilmente las herramientas y opciones esenciales:</h3>
+            <p>* Dashboard: Accede a las estadísticas del sistema, donde podrás ver informes de ventas, pedidos, usuarios y más.</p>
+            <p>* Productos: Añade, actualiza o elimina productos, y gestiona su disponibilidad y precios.</p>
+            <p>* Pedidos: Consulta y gestiona el historial de pedidos, incluyendo el estado y detalles de cada uno.</p>
+            <p>* Facturas: Revisa y gestiona las facturas generadas, incluyendo su estado y detalles.</p>
+            <p>* Usuarios: Revisa y administra la información y permisos de los usuarios registrados.</p>
+            <p>* Configuraciones: Modifica las configuraciones del sistema para mantener todo en funcionamiento.</p>
+        </div>
+        <div class="img-dashboard-user">
+            <img src="{% static 'inicio/images/login/happy-box.png' %}" alt="Imagen dashboard">
+        </div>
     </section>
 {% endblock %}

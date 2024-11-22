@@ -11,6 +11,10 @@ from django.views.generic import TemplateView
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PedidoForm
+from django.http import JsonResponse
+import json 
+from .models import Producto, Pedido
+from django.db.models import Sum
 
 # Create your views here.
 
@@ -64,9 +68,43 @@ class usuario_pedidos(LoginRequiredMixin,TemplateView):
             return render(request, self.template_name,{'form': form, 'pedidos': pedidos})
         
         return render(request, self.template_name, {'form': form, 'pedidos': pedidos})
-
+class usuario_perfil(LoginRequiredMixin,TemplateView):
+    template_name = 'cuenta/user-perfil.html'
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['username'] = self.request.user.username
+        context['email'] = self.request.user.email
+        context['number'] = self.request.user.number
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        # Verificar si la solicitud es AJAX mediante el encabezado X-Requested-With
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            username = request.POST.get('username')  # Obtener el username desde la solicitud POST
+            email = request.POST.get('email')  # Obtener el email desde la solicitud POST
+            number = request.POST.get('number')  # Obtener el number desde la solicitud POST
 
+            # Actualizar el username si se proporciona
+            if username:
+                request.user.username = username
+                request.user.save()
+
+            # Actualizar el email si se proporciona
+            if email:
+                request.user.email = email
+                request.user.save()
+
+            # Actualizar el number si se proporciona
+            if number:
+                request.user.number = number
+                request.user.save()
+
+            return JsonResponse({'success': True, 'message': 'Datos actualizados correctamente.'})
+        else:
+            return JsonResponse({'success': False, 'message': 'No es una solicitud AJAX válida.'})
+
+        
 class usuario_dashboard_admin(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin.html'
     
@@ -78,8 +116,34 @@ class usuario_dashboard_admin(LoginRequiredMixin,TemplateView):
 class DashBoardView(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin-d.html'
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Obtener los productos
+        productos = Producto.objects.all()
+
+        # Obtener las estadísticas de pedidos y ventas por producto
+        ventas_por_producto = Pedido.objects.values('producto__nombre') \
+                                             .annotate(total_ventas=Sum('cantidad')) \
+                                             .order_by('producto__nombre')
+
+        # Preparar los datos para el gráfico
+        productos_nombres = [venta['producto__nombre'] for venta in ventas_por_producto]
+        cantidades_por_producto = [venta['total_ventas'] for venta in ventas_por_producto]
+
+        # Agregar al contexto
+        context['productos_nombres'] = productos_nombres
+        context['cantidades_por_producto'] = cantidades_por_producto
+
+        return context
+    
 class ModifView(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin-m.html'
+    
+
+class PedidosView(LoginRequiredMixin,TemplateView):
+    template_name = 'cuenta/admin-p.html'
+
 
 def salir(request):
     logout(request)
