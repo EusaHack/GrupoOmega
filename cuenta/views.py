@@ -10,11 +10,12 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import TemplateView
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import PedidoForm
+from .forms import PedidoForm,ProductoForm
 from django.http import JsonResponse
 import json 
 from .models import Producto, Pedido
 from django.db.models import Sum
+from django.contrib import messages
 
 # Create your views here.
 
@@ -81,21 +82,16 @@ class usuario_perfil(LoginRequiredMixin,TemplateView):
     def post(self, request, *args, **kwargs):
         # Verificar si la solicitud es AJAX mediante el encabezado X-Requested-With
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            username = request.POST.get('username')  # Obtener el username desde la solicitud POST
-            email = request.POST.get('email')  # Obtener el email desde la solicitud POST
-            number = request.POST.get('number')  # Obtener el number desde la solicitud POST
+            username = request.POST.get('username')  
+            email = request.POST.get('email')
+            number = request.POST.get('number')
 
-            # Actualizar el username si se proporciona
             if username:
                 request.user.username = username
                 request.user.save()
-
-            # Actualizar el email si se proporciona
             if email:
                 request.user.email = email
                 request.user.save()
-
-            # Actualizar el number si se proporciona
             if number:
                 request.user.number = number
                 request.user.save()
@@ -118,20 +114,16 @@ class DashBoardView(LoginRequiredMixin,TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        # Obtener los productos
         productos = Producto.objects.all()
 
-        # Obtener las estadísticas de pedidos y ventas por producto
         ventas_por_producto = Pedido.objects.values('producto__nombre') \
                                              .annotate(total_ventas=Sum('cantidad')) \
                                              .order_by('producto__nombre')
 
-        # Preparar los datos para el gráfico
         productos_nombres = [venta['producto__nombre'] for venta in ventas_por_producto]
         cantidades_por_producto = [venta['total_ventas'] for venta in ventas_por_producto]
 
-        # Agregar al contexto
+
         context['productos_nombres'] = productos_nombres
         context['cantidades_por_producto'] = cantidades_por_producto
 
@@ -141,8 +133,32 @@ class ModifView(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin-m.html'
     
 
-class PedidosView(LoginRequiredMixin,TemplateView):
+class ProductosView(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin-p.html'
+    
+    def get(self, request, *args, **kwargs):
+        form = ProductoForm()
+        productos = Producto.objects.all()
+        return self.render_to_response({'form': form, 'productos': productos})
+    
+    def post(self, request, *args, **kwargs):
+        form = ProductoForm(request.POST or None)  
+        if 'eliminar' in request.POST:  
+            producto_id = request.POST.get('producto_id')
+            producto = get_object_or_404(Producto, pk=producto_id)
+            producto.delete()
+            messages.success(request, 'Producto eliminado correctamente.')
+            form = ProductoForm()
+        
+        else:  
+            form = ProductoForm(request.POST)
+            if form.is_valid():
+                form.save() 
+                messages.success(request, 'Producto agregado correctamente.')
+                form = ProductoForm()  
+
+        productos = Producto.objects.all()
+        return render(request, self.template_name, {'form': form, 'productos': productos})
 
 
 def salir(request):

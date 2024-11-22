@@ -10,3 +10,10 @@ class PedidoForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # Filtrar productos disponibles (puedes agregar más filtros si es necesario)
         self.fields['producto'].queryset = Producto.objects.filter(stock__gt=0)
+        
+
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'descripcion', 'precio', 'stock']
