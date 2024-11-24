@@ -160,6 +160,39 @@ class ProductosView(LoginRequiredMixin,TemplateView):
         productos = Producto.objects.all()
         return render(request, self.template_name, {'form': form, 'productos': productos})
 
+class PedidosView(LoginRequiredMixin, TemplateView):
+    template_name = 'cuenta/admin-pe.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pedidos'] = Pedido.objects.all()  
+        return context
+
+    def post(self, request, *args, **kwargs):
+        pedido_id = request.POST.get("pedido_id")
+        razon_cancelacion = request.POST.get("razon_cancelacion")  # Razón del modal
+        nuevo_estado = request.POST.get("estado_entrega", "pendiente")  # Valor por defecto
+
+        if pedido_id:
+            try:
+                pedido = Pedido.objects.get(id=pedido_id)
+                
+                # Si se envió una razón de cancelación, actualiza el estado
+                if razon_cancelacion:
+                    pedido.estado_entrega = "cancelado"
+                    pedido.razon_cancelacion = razon_cancelacion
+                    # Aquí puedes guardar la razón de cancelación si tienes un campo dedicado o registrar un log
+                    print(pedido.usuario.email)
+                    print(f"Razón de cancelación: {razon_cancelacion}")
+                else:
+                    # Actualiza con el estado normal
+                    pedido.estado_entrega = nuevo_estado
+                
+                pedido.save()
+            except Pedido.DoesNotExist:
+                print(f"No se encontró el pedido con ID {pedido_id}")
+
+        return redirect("pedidos_admin")
 
 def salir(request):
     logout(request)

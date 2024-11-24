@@ -54,6 +54,7 @@ class Pedido(models.Model):
     ESTADO_CHOICES = [
         ('pendiente', 'Pendiente'),
         ('entregado', 'Entregado'),
+        ('en progreso', 'En Progreso'),
         ('cancelado', 'Cancelado')
     ]
     
@@ -62,8 +63,9 @@ class Pedido(models.Model):
     cantidad = models.IntegerField()
     fecha_pedido = models.DateTimeField(auto_now_add=True)
     estado_entrega = models.CharField(
-        max_length=10, choices=ESTADO_CHOICES, default='pendiente'
+        max_length=11, choices=ESTADO_CHOICES, default='pendiente'
     )
+    razon_cancelacion = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"Pedido de {self.usuario.username} para {self.producto.nombre}"
