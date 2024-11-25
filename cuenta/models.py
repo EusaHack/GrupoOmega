@@ -66,6 +66,7 @@ class Pedido(models.Model):
         max_length=11, choices=ESTADO_CHOICES, default='pendiente'
     )
     razon_cancelacion = models.TextField(blank=True, null=True)
+    confirmacion_entrega = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"Pedido de {self.usuario.username} para {self.producto.nombre}"

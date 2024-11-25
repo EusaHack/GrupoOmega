@@ -1,0 +1,143 @@
+{% extends 'cuenta/baseDashboard.html' %}
+{% load static %}
+
+
+{% block avatar %}
+    <div class="user-avatar">
+        <img class="user-avatar" src="{% static 'inicio/images/avatar/admin.jfif' %}" alt="Imagen de usuario">
+    </div>
+{% endblock %}
+
+
+
+{% block menu %}
+    <div class="menu-content">
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="{% url 'dashboard_inicio' %}">Dashboard</a></li>
+            <li><a href="{% url 'productos_admin' %}">Productos</a></li>
+            <li><a href="{% url 'pedidos_admin' %}">Pedidos</a></li>
+            <li><a href="{% url 'usuarios_admin' %}">Usuarios</a></li>
+            <li><a href="{% url 'modificaciones' %}">Configuraciones</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block dashboard %}
+<style>
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.table-custom thead {
+    background-color: #2b4e71;
+    color: white;
+    text-align: left;
+}
+
+.table-custom th {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.table-custom tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo alterno para las filas */
+}
+
+.table-custom tbody tr:hover {
+    background-color: #ddd; /* Cambio de color cuando se pasa el mouse por encima */
+}
+
+.table-custom td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd; /* Borde sutil para las celdas */
+}
+
+.btn-custom {
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+.btn-modificar {
+    background-color: #007bff; /* Color de fondo azul */
+    color: white;
+}
+
+.btn-modificar:hover {
+    background-color: #0056b3; /* Color cuando pasa el mouse */
+}
+
+.btn-eliminar {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: white;
+}
+
+.btn-eliminar:hover {
+    background-color: #c82333; /* Color cuando pasa el mouse */
+}
+
+.table-custom input {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.table-custom input:focus {
+    outline: none;
+    border-color: #4CAF50; /* Color de borde al hacer focus */
+}
+</style>
+<div class="container mt-4">    
+    <h1 class="mb-4">Gestión de Usuarios</h1>
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <table class="table-custom">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Nombre del Negocio</th>
+                <th>Número</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <form method="post">
+                        {% csrf_token %}
+                        <td><input type="text" name="username-{{ usuario.id }}" value="{{ usuario.username }}" class="form-control"></td>
+                        <td><input type="email" name="email-{{ usuario.id }}" value="{{ usuario.email }}" class="form-control"></td>
+                        <td><input type="text" name="name_business-{{ usuario.id }}" value="{{ usuario.name_business }}" class="form-control"></td>
+                        <td><input type="text" name="number-{{ usuario.id }}" value="{{ usuario.number }}" class="form-control"></td>
+                        <td>
+                            <!-- Botón para modificar -->
+                            <input type="hidden" name="user_id" value="{{ usuario.id }}">
+                            <button type="submit" name="modificar" class="btn-custom btn-modificar">Modificar</button>
+                            <!-- Botón para eliminar -->
+                            <button type="submit" name="eliminar" class="btn-custom btn-eliminar">Eliminar</button>
+                        </td>
+                    </form>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

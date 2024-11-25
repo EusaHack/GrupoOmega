@@ -535,7 +535,11 @@ form button:hover {
     border-collapse: collapse;
     margin-top: 20px;
   }
-  
+
+  .productos-table thead th{
+    background-color: #2b4e71;
+  }
+
   .productos-table th, .productos-table td {
     padding: 10px;
     text-align: left;
@@ -544,7 +548,7 @@ form button:hover {
   
   .productos-table th {
     background-color: #f2f2f2;
-    color: #333;
+    color: #fff;
   }
   
   .productos-table tr:nth-child(even) {

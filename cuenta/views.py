@@ -16,6 +16,7 @@ import json
 from .models import Producto, Pedido
 from django.db.models import Sum
 from django.contrib import messages
+from datetime import datetime
 
 # Create your views here.
 
@@ -170,29 +171,63 @@ class PedidosView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         pedido_id = request.POST.get("pedido_id")
-        razon_cancelacion = request.POST.get("razon_cancelacion")  # Razón del modal
-        nuevo_estado = request.POST.get("estado_entrega", "pendiente")  # Valor por defecto
-
+        razon_cancelacion = request.POST.get("razon_cancelacion")
+        confirmacion_entrega = request.POST.get("confirmacion_entrega")
+        nuevo_estado = request.POST.get("estado_entrega", "pendiente")
+        fecha_hoy = datetime.now().date()
         if pedido_id:
             try:
                 pedido = Pedido.objects.get(id=pedido_id)
-                
-                # Si se envió una razón de cancelación, actualiza el estado
                 if razon_cancelacion:
                     pedido.estado_entrega = "cancelado"
                     pedido.razon_cancelacion = razon_cancelacion
-                    # Aquí puedes guardar la razón de cancelación si tienes un campo dedicado o registrar un log
-                    print(pedido.usuario.email)
-                    print(f"Razón de cancelación: {razon_cancelacion}")
+                    producto = pedido.producto
+                    producto.stock += pedido.cantidad
+                    producto.save()
+                    functions_x.envio_correo_estatus_pedido(pedido.usuario.email,pedido.estado_entrega,pedido.id,razon_cancelacion,fecha_hoy, pedido.producto.nombre)
+                elif confirmacion_entrega:
+                    pedido.estado_entrega = "entregado"
+                    pedido.confirmacion_entrega = confirmacion_entrega
+                    functions_x.envio_correo_estatus_pedido(pedido.usuario.email,pedido.estado_entrega,pedido.id,confirmacion_entrega,fecha_hoy,pedido.producto.nombre)
                 else:
-                    # Actualiza con el estado normal
+                    if nuevo_estado == "en progreso":
+                        functions_x.envio_correo_estatus_pedido(pedido.usuario.email,nuevo_estado,pedido.id,razon_cancelacion,fecha_hoy,pedido.producto.nombre)
                     pedido.estado_entrega = nuevo_estado
-                
                 pedido.save()
             except Pedido.DoesNotExist:
                 print(f"No se encontró el pedido con ID {pedido_id}")
 
         return redirect("pedidos_admin")
+
+class ModificacionesUsuariosVista(LoginRequiredMixin, TemplateView):
+    template_name = 'cuenta/admin-users.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['usuarios'] = CustomUser.objects.exclude(is_superuser=True)  # Pasa todos los usuarios al template
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        if 'eliminar' in request.POST:
+            user_id = request.POST.get('user_id')  # Obtener el ID del usuario desde el formulario
+            usuario = get_object_or_404(CustomUser, pk=user_id)  # Obtener el usuario o devolver 404
+            usuario.delete()  # Eliminar el usuario
+            messages.success(request, "Usuario eliminado correctamente.")
+            return redirect('usuarios_admin')  # Redirigir a la misma vista después de eliminar
+        if 'modificar' in request.POST:
+            user_id = request.POST.get('user_id')  # Obtener el ID del usuario
+            usuario = get_object_or_404(CustomUser, pk=user_id)
+            usuario.username = request.POST.get(f'username-{user_id}', usuario.username)
+            usuario.email = request.POST.get(f'email-{user_id}', usuario.email)
+            usuario.name_business = request.POST.get(f'name_business-{user_id}', usuario.name_business)
+            usuario.number = request.POST.get(f'number-{user_id}', usuario.number)
+            usuario.save()  # Guardar los cambios en la base de datos
+
+            messages.success(request, "Usuario modificado correctamente.")
+            return redirect('usuarios_admin')
+        
+        messages.error(request, "No se pudo procesar la solicitud.")
+        return redirect('usuarios_admin')
 
 def salir(request):
     logout(request)

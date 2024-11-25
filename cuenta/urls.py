@@ -17,6 +17,7 @@ urlpatterns = [
     path('dashboard_inicio/', DashBoardView.as_view(), name='dashboard_inicio'),
     path('productos_admin/', ProductosView.as_view(), name='productos_admin'),
     path('pedidos_admin/', PedidosView.as_view(), name='pedidos_admin'),
+    path('usuarios_admin/', ModificacionesUsuariosVista.as_view(), name = 'usuarios_admin' ),
     path('eliminar_producto/<int:pk>/', ProductosView.as_view(), name='eliminar_producto'),
     path('modificaciones/', ModifView.as_view(), name='modificaciones'),
     path('reset/', views.reset_password, name="reset_password"),
