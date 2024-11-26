@@ -175,43 +175,96 @@ h1 {
     padding: 15px 0;
 }
 
-.cont-int, .cont-int1, .cont-int2{
+.cont-int1, .cont-int2{
     padding: 20px;
     text-align: center;
     border: solid black 5px;
     border-radius: 10px;
 }
 
-textarea {
-    padding: 10px;
-    outline: none;
-    min-width: 450px;
-    max-width: 1000px;
-    max-height: 70vh;
-    min-height: 10vh;
+.cont-int {
+    padding: 20px;
+    border: solid black 5px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Tamaño más grande */
+    margin: 0 auto;
+}
+
+.cont-int form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cont-int .row {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos en toda la fila */
+    align-items: center;
+    flex-wrap: wrap; /* Permite que los elementos salten si no caben */
+    gap: 15px;
+}
+
+.cont-int .row div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 1; /* Hace que cada elemento ocupe el mismo espacio */
+    min-width: 200px; /* Asegura un tamaño mínimo para cada columna */
+}
+
+.cont-int label {
+    font-weight: bold;
     font-size: 14px;
+    color: #333;
 }
 
-.btns {
-    padding: 3px 0;
-}
-
-.select {
-    padding: 10px 0px;
-}
-
-.cont-int button{
-    background-color: #2b4e71;
-    padding: 10px 20px;
-    border: none;
+.cont-int input[type="text"] {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    cursor: pointer;
+    font-size: 14px;
+    width: 80%; /* Asegura que los inputs ocupen el espacio disponible */
+    box-sizing: border-box;
 }
 
+.cont-int .button-send {
+    background-color: #2b4e71;
+    padding: 6px 10px; 
+    font-size: 14px;   
+    color: #fff;
+    border: none;
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 150px; /* Ancho fijo más corto */
+    text-align: center; /* Centrar el texto */
+    margin: 15px auto 0; /* Centra el botón horizontalmente */
+    display: block; /* Asegura que el botón se comporte como un bloque */
+}
+
+.cont-int .btns {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
 
 .cont-int button a{
     text-decoration: none;
     color: #ffffff;
+}
+
+.cont-int .button-send:hover {
+    background-color: #0056b3;
+}
+
+.color-picker {
+    border: none;
+    width: 50px;
+    height: 50px; /* Tamaño más grande */
+    cursor: pointer;
 }
 
 .cont-int1 .color-button2{

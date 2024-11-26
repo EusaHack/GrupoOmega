@@ -4,16 +4,15 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.hashers import make_password
 from django.http import Http404
 from django.contrib.auth import logout,get_user_model,login
-from .models import CustomUser,Producto,Pedido
 from . import functions_x
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import TemplateView
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import PedidoForm,ProductoForm
+from .forms import *
 from django.http import JsonResponse
 import json 
-from .models import Producto, Pedido
+from .models import *
 from django.db.models import Sum
 from django.contrib import messages
 from datetime import datetime
@@ -132,6 +131,21 @@ class DashBoardView(LoginRequiredMixin,TemplateView):
     
 class ModifView(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin-m.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pagina = Pagina.objects.first()
+        context['form'] = PaginaForm(instance=pagina)
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        pagina = Pagina.objects.first()  # Obtener el primer objeto Pagina
+        form = PaginaForm(request.POST, instance=pagina)  # Pasar los datos del formulario
+        
+        if form.is_valid():
+            form.save()  # Guardar los cambios en el objeto Pagina
+            return redirect('modificaciones')  # Redirigir al mismo lugar (o a otra URL si prefieres)
+        return render(request, self.template_name, {'form': form})
     
 
 class ProductosView(LoginRequiredMixin,TemplateView):

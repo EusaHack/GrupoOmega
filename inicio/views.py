@@ -1,11 +1,18 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from . import functions
-from django.contrib import messages  # Usamos mensajes de Django
-# Create your views here.
+from django.contrib import messages
+from cuenta.models import Pagina
+
 
 class index(TemplateView):
     template_name = "inicio/index.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pagina = Pagina.objects.first()
+        context['pagina'] = pagina
+        return context
     
     def post(self, request, *args, **kwargs):
         producto = request.POST.get("producto")

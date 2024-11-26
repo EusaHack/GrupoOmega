@@ -10,4 +10,5 @@ class PedidoAdmin(admin.ModelAdmin):
 admin.site.register(CustomUser)
 admin.site.register(Producto)
 admin.site.register(Pedido, PedidoAdmin)
+admin.site.register(Pagina)
 

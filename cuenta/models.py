@@ -75,3 +75,10 @@ class Pedido(models.Model):
         return self.cantidad * self.producto.precio
 
 
+class Pagina(models.Model):
+    titulo = models.CharField(max_length=500, default="Empaqueta tu futuro con nuestras cajas multiusos...")
+    titulo_dos = models.CharField(max_length=500, default="¡DESCUBRE LA CALIDAD QUE MARCA LA DIFERENCA!")
+    color_letra_titulo = models.CharField(max_length=8, default="#2b4e71")
+    color_letra_titulo_dos = models.CharField(max_length=8, default="#ffffff")
+    def __str__(self):
+        return 'index'

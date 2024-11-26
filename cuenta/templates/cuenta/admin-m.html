@@ -23,25 +23,55 @@
 {% block dashboard %}
     <section class="dashboard">
         <h2>Modificaciones Pagina</h2>
+        <!--
+        <div class="txt-start">
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="id_titulo">Título 1:</label>
+                    {{ form.titulo }}
+                </div>
+                <div>
+                    <label for="id_titulo_dos">Título 2:</label>
+                    {{ form.titulo_dos }}
+                </div>
+                <button type="submit" class="button-send">Guardar cambios</button>
+            </form>
+        </div> -->
         <p>Bienvenido al panel de control! Aquí puedes personalizar y explorar cada sección de la página según tus necesidades. Por favor, selecciona la opción que deseas modificar o analizar.</p>
         <br>
-        <h1>Texto</h1>
-        <h3 id="hex">#000000</h3>
+        <h1>Pagina Principal</h1>
         <div class="cont-int">
-            <textarea name="colorPicker" id="textArea" placeholder="Escriba su texto para enviar "></textarea>
-            <div class="btns">
-                <input type="color" class="color-picker">
-            </div>
-            <div class="select">
-                <select id="mi-lista-desplegable" name="opciones">
-                    <option value="opcion1">Nav Bar</option>
-                    <option value="opcion2">Inicio</option>
-                    <option value="opcion3">Nosotros</option>
-                    <option value="opcion4">Productos</option>
-                    <option value="opcion4">Contacto</option>
-                </select>
-            </div>
-            <button><a href="#">Aplicar</a></button>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div>
+                        <label for="id_titulo">Título 1:</label>
+                        {{ form.titulo }}
+                    </div>
+                    <div>
+                        <label for="id_titulo_dos">Título 2:</label>
+                        {{ form.titulo_dos }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="color_letra_titulo">Color Título 1:</label>
+                        {{ form.color_letra_titulo }}
+                    </div>
+                    <div>
+                        <label for="color_letra_titulo_dos">Color Título 2:</label>
+                        {{ form.color_letra_titulo_dos }}
+                    </div>
+                </div>
+                <div class="row">
+                    <h3 id="hex">#000000</h3>
+                    <div class="btns">
+                        <input type="color" class="color-picker">
+                    </div>
+                </div>
+                <button type="submit" class="button-send">Guardar cambios</button>
+            </form>
         </div>
         <br>
         <h1>Botones</h1>
@@ -73,6 +103,22 @@
             <button class="color-button4"><a href="#">Aplicar</a></button>
         </div>
     </section>
+
+<script>
+    // Función para cambiar el contenido del h1
+    function changeHeadingText() {
+        // Capturamos el elemento h1 por su id
+        var heading = document.getElementById('editable-heading');
+        
+        // Usamos prompt para pedir al usuario que ingrese el nuevo texto
+        var newText = prompt('Escribe el nuevo texto para el encabezado:');
+        
+        // Si el usuario no cancela, cambiamos el texto del h1
+        if (newText !== null) {
+            heading.innerHTML = newText;  // Cambiar el contenido del h1
+        }
+    }
+</script>
 {% endblock %}
 
 {% block script %}
