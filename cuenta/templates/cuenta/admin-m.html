@@ -23,26 +23,11 @@
 {% block dashboard %}
     <section class="dashboard">
         <h2>Modificaciones Pagina</h2>
-        <!--
-        <div class="txt-start">
-            <form method="POST">
-                {% csrf_token %}
-                <div>
-                    <label for="id_titulo">Título 1:</label>
-                    {{ form.titulo }}
-                </div>
-                <div>
-                    <label for="id_titulo_dos">Título 2:</label>
-                    {{ form.titulo_dos }}
-                </div>
-                <button type="submit" class="button-send">Guardar cambios</button>
-            </form>
-        </div> -->
         <p>Bienvenido al panel de control! Aquí puedes personalizar y explorar cada sección de la página según tus necesidades. Por favor, selecciona la opción que deseas modificar o analizar.</p>
         <br>
         <h1>Pagina Principal</h1>
         <div class="cont-int">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
                     <div>
@@ -65,14 +50,42 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div>
+                        <label for="color_boton">Color Boton:</label>
+                        {{ form.color_boton }}
+                    </div>
+                    <div>
+                        <label for="color_letra_boton">Color Letra Boton:</label>
+                        {{ form.color_letra_boton }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="id_imagen_inicio">Imagen de inicio:</label>
+                        {{ form.imagen_inicio }}
+                    </div>
+                </div>
+                <div class="row-color">
                     <h3 id="hex">#000000</h3>
                     <div class="btns">
                         <input type="color" class="color-picker">
                     </div>
                 </div>
-                <button type="submit" class="button-send">Guardar cambios</button>
+                <div class="button-container">
+                    <button type="submit" name="action" value="save" class="button-send">Guardar cambios</button>
+                    <button type="submit" name="action" value="restore" class="button-send">Restaurar datos anteriores</button>
+                </div>
             </form>
+            <div class="button-container">
+                <button id="showIframeBtn" class="button-send" onclick="showIframe()">Mostrar Template</button>
+                <button id="hideIframeBtn" class="button-send" style="display: none;" onclick="hideIframe()">Cerrar</button>
+            </div>    
         </div>
+
+        <div id="iframeContainer" style="display: none; margin-top: 20px;">
+            <iframe id="iframeTemplate" src="{% url 'inicio' %}" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+        </div>
+
         <br>
         <h1>Botones</h1>
         <h3 id="hex1">#000000</h3>
@@ -105,19 +118,28 @@
     </section>
 
 <script>
-    // Función para cambiar el contenido del h1
-    function changeHeadingText() {
-        // Capturamos el elemento h1 por su id
-        var heading = document.getElementById('editable-heading');
-        
-        // Usamos prompt para pedir al usuario que ingrese el nuevo texto
-        var newText = prompt('Escribe el nuevo texto para el encabezado:');
-        
-        // Si el usuario no cancela, cambiamos el texto del h1
-        if (newText !== null) {
-            heading.innerHTML = newText;  // Cambiar el contenido del h1
-        }
+    function showIframe() {
+        const iframeContainer = document.getElementById('iframeContainer');
+        const showButton = document.getElementById('showIframeBtn');
+        const hideButton = document.getElementById('hideIframeBtn');
+
+        // Mostrar el contenedor y ocultar el botón de mostrar
+        iframeContainer.style.display = 'block';
+        showButton.style.display = 'none';
+        hideButton.style.display = 'inline-block';
     }
+
+    function hideIframe() {
+        const iframeContainer = document.getElementById('iframeContainer');
+        const showButton = document.getElementById('showIframeBtn');
+        const hideButton = document.getElementById('hideIframeBtn');
+
+        // Ocultar el contenedor y mostrar el botón de mostrar
+        iframeContainer.style.display = 'none';
+        showButton.style.display = 'inline-block';
+        hideButton.style.display = 'none';
+    }
+
 </script>
 {% endblock %}
 

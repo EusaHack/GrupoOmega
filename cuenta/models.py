@@ -80,5 +80,9 @@ class Pagina(models.Model):
     titulo_dos = models.CharField(max_length=500, default="¡DESCUBRE LA CALIDAD QUE MARCA LA DIFERENCA!")
     color_letra_titulo = models.CharField(max_length=8, default="#2b4e71")
     color_letra_titulo_dos = models.CharField(max_length=8, default="#ffffff")
+    color_boton = models.CharField(max_length=8, default="#2b4e71")
+    color_letra_boton = models.CharField(max_length=8, default="#ffff")
+    imagen_inicio = models.ImageField(upload_to='inicio/images/', blank=True, null=True)  # campo para la imagen
+
     def __str__(self):
         return 'index'

@@ -22,4 +22,4 @@ class ProductoForm(forms.ModelForm):
 class PaginaForm(forms.ModelForm):
     class Meta:
         model = Pagina
-        fields = ['titulo', 'titulo_dos','color_letra_titulo','color_letra_titulo_dos']
+        fields = ['titulo', 'titulo_dos','color_letra_titulo','color_letra_titulo_dos','color_boton','color_letra_boton','imagen_inicio']

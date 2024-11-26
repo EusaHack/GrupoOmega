@@ -140,12 +140,45 @@ class ModifView(LoginRequiredMixin,TemplateView):
     
     def post(self, request, *args, **kwargs):
         pagina = Pagina.objects.first()  # Obtener el primer objeto Pagina
-        form = PaginaForm(request.POST, instance=pagina)  # Pasar los datos del formulario
+        action = request.POST.get('action', 'save')  # Identificar si es guardar o restaurar
         
-        if form.is_valid():
-            form.save()  # Guardar los cambios en el objeto Pagina
-            return redirect('modificaciones')  # Redirigir al mismo lugar (o a otra URL si prefieres)
-        return render(request, self.template_name, {'form': form})
+        if action == 'restore':
+            # Restaurar datos desde la sesión
+            backup_data = request.session.get('backup_data', {})
+            
+            if backup_data:
+                # Aplicar los datos respaldados al objeto
+                for field, value in backup_data.items():
+                    if field == 'imagen_inicio':
+                        value = value.replace("/media", "")
+                    setattr(pagina, field, value)
+                pagina.save()
+                messages.success(request, "Datos restaurados correctamente")
+            else:
+                messages.error(request, "No hay datos anteriores para restaurar")
+            
+            return redirect('modificaciones')  # Redirigir al mismo lugar
+
+        elif action == 'save':
+            # Respaldar los datos actuales antes de guardar
+            request.session['backup_data'] = {
+                'titulo': pagina.titulo,
+                'titulo_dos': pagina.titulo_dos,
+                'color_letra_titulo': pagina.color_letra_titulo,
+                'color_letra_titulo_dos': pagina.color_letra_titulo_dos,
+                'color_boton': pagina.color_boton,
+                'color_letra_boton': pagina.color_letra_boton,
+                'imagen_inicio': pagina.imagen_inicio.url if pagina.imagen_inicio else None  # Respaldar la URL de la imagen si existe
+            }
+
+            form = PaginaForm(request.POST, request.FILES, instance=pagina)  # Procesar los datos del formulario y los archivos
+            if form.is_valid():
+                form.save()  # Guardar los cambios
+                messages.success(request, "Datos actualizados correctamente")
+                return redirect('modificaciones')  # Redirigir al mismo lugar
+            
+            # Si el formulario no es válido, mostrar errores
+            return render(request, self.template_name, {'form': form})
     
 
 class ProductosView(LoginRequiredMixin,TemplateView):

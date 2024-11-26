@@ -3,16 +3,13 @@
 {% block section %}
 <section class="zona-1">
     <div class="container">
-        <img class="image-zona-1" src="{% static 'inicio/images/home-images/ini-img.png' %}" alt="">
+        <!--<img class="image-zona-1" src="{% static 'inicio/images/home-images/ini-img.png' %}" alt="">-->
+        <img class="image-zona-1" src="{{ pagina.imagen_inicio.url }}" alt="">
     </div>
     <div class="txt-start">
         <h1 id="editable-heading" style="color: {{ pagina.color_letra_titulo }};" >{{ pagina.titulo }}</h1>
-        <!--<h1>Empaqueta tu futuro con nuestras cajas multiusos, diseñadas para hacer envíos en línea y proyectos creativos
-            más faciles y más elegantes que nunca...
-        </h1>
-        <p>¡DESCUBRE LA CALIDAD QUE MARCA LA DIFERENCA!</p>-->
         <p style="color: {{ pagina.color_letra_titulo_dos }};">{{ pagina.titulo_dos }}</p>
-        <button class="button-send" onclick="openModalForm()">Realiza una cotización</button>
+        <button style="background-color: {{ pagina.color_boton }}; color: {{ pagina.color_letra_boton }};" class="button-send" onclick="openModalForm()">Realiza una cotización</button>
     </div> 
 </section>
 {% endblock %}

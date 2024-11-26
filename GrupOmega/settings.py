@@ -125,3 +125,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'cuenta.CustomUser'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+# Ruta donde se almacenarán los archivos de medios (por ejemplo, imágenes subidas por los usuarios)
+MEDIA_URL = '/media/'
+
+# Ruta absoluta del sistema de archivos donde se almacenan los archivos de medios
+MEDIA_ROOT = BASE_DIR / 'media'

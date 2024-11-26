@@ -134,9 +134,7 @@
 }
 
 .zona-1 .txt-start .button-send{
-    background-color: #2b4e71; /* Color azul */
     border: none;
-    color: #ffffff;
     padding: 13px 20px;
     font-size: 20px;
     cursor: pointer;
