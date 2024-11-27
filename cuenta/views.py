@@ -129,13 +129,15 @@ class DashBoardView(LoginRequiredMixin,TemplateView):
 
         return context
     
-class ModifView(LoginRequiredMixin,TemplateView):
+'''class ModifView(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin-m.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pagina = Pagina.objects.first()
+        pagina_nosotros = PaginaNosotros.objects.first()
         context['form'] = PaginaForm(instance=pagina)
+        context['form_nosotros'] = PaginaFormNosotros(instance=pagina_nosotros)
         return context
     
     def post(self, request, *args, **kwargs):
@@ -178,8 +180,90 @@ class ModifView(LoginRequiredMixin,TemplateView):
                 return redirect('modificaciones')  # Redirigir al mismo lugar
             
             # Si el formulario no es válido, mostrar errores
-            return render(request, self.template_name, {'form': form})
-    
+            return render(request, self.template_name, {'form': form})'''
+
+
+class ModifView(LoginRequiredMixin, TemplateView):
+    template_name = 'cuenta/admin-m.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pagina = Pagina.objects.first()
+        pagina_nosotros = PaginaNosotros.objects.first()
+        context['form'] = PaginaForm(instance=pagina)
+        context['form_nosotros'] = PaginaFormNosotros(instance=pagina_nosotros)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form_name = request.POST.get('form_name')
+        action = request.POST.get('action', 'save')
+
+        if form_name == 'form_principal':
+            # Procesar el formulario principal
+            pagina = Pagina.objects.first()
+            if action == 'restore':
+                backup_data = request.session.get('backup_data_principal', {})
+                if backup_data:
+                    for field, value in backup_data.items():
+                        if field == 'imagen_inicio':
+                            value = value.replace("/media", "")
+                        setattr(pagina, field, value)
+                    pagina.save()
+                    messages.success(request, "Datos del formulario principal restaurados correctamente")
+                else:
+                    messages.error(request, "No hay datos anteriores para restaurar en el formulario principal")
+                return redirect('modificaciones')
+
+            elif action == 'save':
+                request.session['backup_data_principal'] = {
+                    'titulo': pagina.titulo,
+                    'titulo_dos': pagina.titulo_dos,
+                    'color_letra_titulo': pagina.color_letra_titulo,
+                    'color_letra_titulo_dos': pagina.color_letra_titulo_dos,
+                    'color_boton': pagina.color_boton,
+                    'color_letra_boton': pagina.color_letra_boton,
+                    'imagen_inicio': pagina.imagen_inicio.url if pagina.imagen_inicio else None
+                }
+                form = PaginaForm(request.POST, request.FILES, instance=pagina)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, "Datos del formulario principal actualizados correctamente")
+                return redirect('modificaciones')
+
+        elif form_name == 'form_nosotros':
+            # Procesar el formulario de "Nosotros"
+            pagina_nosotros = PaginaNosotros.objects.first()
+            if action == 'restore':
+                backup_data = request.session.get('backup_data_nosotros', {})
+                if backup_data:
+                    for field, value in backup_data.items():
+                        setattr(pagina_nosotros, field, value)
+                    pagina_nosotros.save()
+                    messages.success(request, "Datos del formulario 'Nosotros' restaurados correctamente")
+                else:
+                    messages.error(request, "No hay datos anteriores para restaurar en el formulario 'Nosotros'")
+                return redirect('modificaciones')
+
+            elif action == 'save':
+                request.session['backup_data_nosotros'] = {
+                    'titulo': pagina_nosotros.titulo,
+                    'titulo_dos': pagina_nosotros.titulo_dos,
+                    'color_letra_titulo': pagina_nosotros.color_letra_titulo,
+                    'color_letra_titulo_dos': pagina_nosotros.color_letra_titulo_dos,
+                    'txt_uno': pagina_nosotros.txt_uno,
+                    'txt_dos': pagina_nosotros.txt_dos,
+                    'color_txt_uno': pagina_nosotros.color_txt_uno,
+                    'color_txt_dos': pagina_nosotros.color_txt_dos,
+                }
+                form_nosotros = PaginaFormNosotros(request.POST, instance=pagina_nosotros)
+                if form_nosotros.is_valid():
+                    form_nosotros.save()
+                    messages.success(request, "Datos del formulario 'Nosotros' actualizados correctamente")
+                return redirect('modificaciones')
+
+        # Si no se identifica el formulario, redirigir
+        messages.error(request, "Formulario no identificado")
+        return redirect('modificaciones')
 
 class ProductosView(LoginRequiredMixin,TemplateView):
     template_name = 'cuenta/admin-p.html'

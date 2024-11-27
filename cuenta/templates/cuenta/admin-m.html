@@ -29,6 +29,7 @@
         <div class="cont-int">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" name="form_name" value="form_principal">
                 <div class="row">
                     <div>
                         <label for="id_titulo">Título 1:</label>
@@ -60,8 +61,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div>
-                        <label for="id_imagen_inicio">Imagen de inicio:</label>
+                    <div class="form-img">
+                        <label for="id_imagen_inicio" class="form-label" >Imagen de inicio:</label>
                         {{ form.imagen_inicio }}
                     </div>
                 </div>
@@ -87,15 +88,69 @@
         </div>
 
         <br>
-        <h1>Botones</h1>
-        <h3 id="hex1">#000000</h3>
-        <div class="cont-int1">
-            <button class="color-button1"><a href="#">Boton Prueba</a></button>
-            <div class="btns">
-                <input type="color" class="color-picker">
-            </div>
-            <button class="color-button2"><a href="#">Aplicar</a></button>
+        <h1>Nosotros</h1>
+        <div class="cont-int">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="form_name" value="form_nosotros">
+                <div class="row">
+                    <div>
+                        <label for="id_titulo">Título 1:</label>
+                        {{ form_nosotros.titulo }}
+                    </div>
+                    <div>
+                        <label for="id_titulo_dos">Título 2:</label>
+                        {{ form_nosotros.titulo_dos }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="color_letra_titulo">Color Título 1:</label>
+                        {{ form_nosotros.color_letra_titulo }}
+                    </div>
+                    <div>
+                        <label for="color_letra_titulo_dos">Color Título 2:</label>
+                        {{ form_nosotros.color_letra_titulo_dos }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="txt_uno">Texto 1:</label>
+                        {{ form_nosotros.txt_uno }}
+                    </div>
+                    <div>
+                        <label for="color_txt_uno">Color Texto 1:</label>
+                        {{ form_nosotros.color_txt_uno }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="txt_dos">Texto 2:</label>
+                        {{ form_nosotros.txt_dos }}
+                    </div>
+                    <div>
+                        <label for="color_txt_dos">Color Texto 2:</label>
+                        {{ form_nosotros.color_txt_dos }}
+                    </div>
+                </div>
+                <div class="row-color">
+                    <h3 id="hex">#000000</h3>
+                    <div class="btns">
+                        <input type="color" class="color-picker">
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button type="submit" name="action" value="save" class="button-send">Guardar cambios</button>
+                    <button type="submit" name="action" value="restore" class="button-send">Restaurar datos anteriores</button>
+                </div>
+            </form>
+            <div class="button-container">
+                <button id="showIframeBtn" class="button-send" onclick="showIframe()">Mostrar Template</button>
+                <button id="hideIframeBtn" class="button-send" style="display: none;" onclick="hideIframe()">Cerrar</button>
+            </div>    
         </div>
+
+
         <br>
         <h1>Nav Bar</h1>
         <h3 id="hex2">#000000</h3>

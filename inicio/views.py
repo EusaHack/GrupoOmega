@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from . import functions
 from django.contrib import messages
-from cuenta.models import Pagina
+from cuenta.models import *
 
 
 class index(TemplateView):
@@ -27,8 +27,13 @@ class index(TemplateView):
         functions.enviar_correo(producto,cantidad,ciudad,nombre,correo,telefono,empresa,mensaje)
         return render(request, self.template_name)
 
-def nosotros(request):
-    return render(request, "inicio/nosotros.html")
+class nosotros(TemplateView):
+    template_name = "inicio/nosotros.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pagina = PaginaNosotros.objects.first()
+        context['pagina'] = pagina
+        return context
 
 class productos(TemplateView):
     template_name = "inicio/productos.html"

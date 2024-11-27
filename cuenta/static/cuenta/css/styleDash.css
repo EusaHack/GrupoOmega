@@ -318,6 +318,26 @@ h1 {
     text-decoration: none;
 }
 
+.form-img {
+    margin: 10px 0;
+}
+
+.form-label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="file"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%; /* Ajusta el ancho al contenedor */
+    box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
 
 .cont-int1 .color-button2{
     background-color: #2b4e71;

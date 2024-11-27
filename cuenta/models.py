@@ -86,3 +86,17 @@ class Pagina(models.Model):
 
     def __str__(self):
         return 'index'
+    
+    
+class PaginaNosotros(models.Model):
+    titulo = models.CharField(max_length=100, default="¿Quiénes somos?")
+    titulo_dos = models.CharField(max_length=500, default="Diferencias")
+    color_letra_titulo = models.CharField(max_length=8, default="#2b4e71")
+    color_letra_titulo_dos = models.CharField(max_length=8, default="#ffffff")
+    txt_uno = models.TextField(default="") 
+    txt_dos = models.TextField(default="")
+    color_txt_uno = models.CharField(max_length=8, default="#2b4e71")
+    color_txt_dos = models.CharField(max_length=8, default="#ffffff")
+
+    def __str__(self):
+        return 'Nosotros'

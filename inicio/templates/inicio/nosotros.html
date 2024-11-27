@@ -6,22 +6,12 @@
         <img class="image-us" src="{% static 'inicio/images/home-images/us.jpg' %}" alt="">
     </div>
     <div class="txt-about-us">
-        <h2>¿Quiénes somos?</h2>
+        <h2 style="color: {{ pagina.color_letra_titulo }};">{{ pagina.titulo }}</h2>
+        <p style="color: {{ pagina.color_txt_uno }};">
+        {{ pagina.txt_uno }}
         <p>
-        Somos una empresa especializada en la fabricación y distribución de productos de cartón para múltiples aplicaciones. 
-        Ofrecemos una amplia variedad de soluciones de cartón, como cajas para usos múltiples, envíos de venta en línea, archivo muerto, 
-        contenedores cerrados, contenedores calados, cartón corrugado y esquineros de protección. Nos dedicamos a satisfacer las necesidades 
-        de nuestros clientes con productos de alta calidad, diseñados para brindar resistencia, funcionalidad y sostenibilidad en cada uso.
-        <p>
-        <h2>Diferencias</h2>
-        <ul class="differences">
-            <li><a>✓ Calidad Superior: Utilizamos materiales de alta resistencia para garantizar que cada producto cumpla con los estándares de durabilidad y protección</a>
-            </li>
-            <li><a>✓ Variedad de Productos: Ofrecemos una gama completa de soluciones de cartón, desde cajas para envíos hasta esquineros y contenedores especializados.</a>
-            </li>
-            <li><a>✓ Personalización: Diseñamos y fabricamos productos a la medida de las necesidades de nuestros clientes, ajustándonos a sus especificaciones.</a>
-            </li>
-        </ul>
+        <h2 style="color: {{ pagina.color_letra_titulo_dos }};" >{{ pagina.titulo_dos }}</h2>
+        <p style="color: {{ pagina.color_txt_dos }};" >{{ pagina.txt_dos }}</p>
     </div>
 </section>
 {% endblock %}

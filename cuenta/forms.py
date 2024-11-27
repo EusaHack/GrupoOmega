@@ -23,3 +23,9 @@ class PaginaForm(forms.ModelForm):
     class Meta:
         model = Pagina
         fields = ['titulo', 'titulo_dos','color_letra_titulo','color_letra_titulo_dos','color_boton','color_letra_boton','imagen_inicio']
+        
+
+class PaginaFormNosotros(forms.ModelForm):
+    class Meta:
+        model = PaginaNosotros
+        fields = ['titulo', 'titulo_dos','color_letra_titulo','color_letra_titulo_dos','txt_uno','txt_dos','color_txt_uno','color_txt_dos']
