@@ -134,9 +134,9 @@
                     </div>
                 </div>
                 <div class="row-color">
-                    <h3 id="hex">#000000</h3>
+                    <h3 id="hex1">#000000</h3>
                     <div class="btns">
-                        <input type="color" class="color-picker">
+                        <input type="color" class="color-picker-2">
                     </div>
                 </div>
                 <div class="button-container">
@@ -145,12 +145,103 @@
                 </div>
             </form>
             <div class="button-container">
-                <button id="showIframeBtn" class="button-send" onclick="showIframe()">Mostrar Template</button>
-                <button id="hideIframeBtn" class="button-send" style="display: none;" onclick="hideIframe()">Cerrar</button>
+                <button id="showIframeBtnNo" class="button-send" onclick="showIframeNo()">Mostrar Template</button>
+                <button id="hideIframeBtnNo" class="button-send" style="display: none;" onclick="hideIframeNo()">Cerrar</button>
             </div>    
         </div>
-
-
+        <div id="iframeContainerNo" style="display: none; margin-top: 20px;">
+            <iframe id="iframeTemplateNo" src="{% url 'nosotros' %}" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+        </div>
+        <br>
+        <h1>Productos</h1>
+        <div class="cont-int">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="form_name" value="form_productos">
+                <div class="row">
+                    <div>
+                        <label for="color_letra_titulo">Color Título:</label>
+                        {{ form_productos.color_letra_titulo }}
+                    </div>
+                    <div>
+                        <label for="color_letra_titulo_dos">Color Texto:</label>
+                        {{ form_productos.color_letra_titulo_dos }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="color_btn">Color Boton:</label>
+                        {{ form_productos.color_btn }}
+                    </div>
+                    <div>
+                        <label for="color_letra_btn">Color Letra Boton:</label>
+                        {{ form_productos.color_letra_btn }}
+                    </div>
+                </div>
+                <div class="row-color">
+                    <h3 id="hex2">#000000</h3>
+                    <div class="btns">
+                        <input type="color" class="color-picker-3">
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button type="submit" name="action" value="save" class="button-send">Guardar cambios</button>
+                    <button type="submit" name="action" value="restore" class="button-send">Restaurar datos anteriores</button>
+                </div>
+            </form>
+            <div class="button-container">
+                <button id="showIframeBtnPro" class="button-send" onclick="showIframePro()">Mostrar Template</button>
+                <button id="hideIframeBtnPro" class="button-send" style="display: none;" onclick="hideIframePro()">Cerrar</button>
+            </div>    
+        </div>
+        <div id="iframeContainerPro" style="display: none; margin-top: 20px;">
+            <iframe id="iframeTemplatePro" src="{% url 'productos' %}" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+        </div>
+        <br>
+        <h1>Contacto</h1>
+        <div class="cont-int">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="form_name" value="form_contacto">
+                <div class="row">
+                    <div>
+                        <label for="color_letra_titulo">Color Título:</label>
+                        {{ form_contacto.color_letra_titulo }}
+                    </div>
+                    <div>
+                        <label for="color_letra_titulo_dos">Color Texto:</label>
+                        {{ form_contacto.color_letra_titulo_dos }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label for="color_btn">Color Boton:</label>
+                        {{ form_contacto.color_btn }}
+                    </div>
+                    <div>
+                        <label for="color_letra_btn">Color Letra Boton:</label>
+                        {{ form_contacto.color_letra_btn }}
+                    </div>
+                </div>
+                <div class="row-color">
+                    <h3 id="hex2">#000000</h3>
+                    <div class="btns">
+                        <input type="color" class="color-picker-3">
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button type="submit" name="action" value="save" class="button-send">Guardar cambios</button>
+                    <button type="submit" name="action" value="restore" class="button-send">Restaurar datos anteriores</button>
+                </div>
+            </form>
+            <div class="button-container">
+                <button id="showIframeBtnCon" class="button-send" onclick="showIframeCon()">Mostrar Template</button>
+                <button id="hideIframeBtnCon" class="button-send" style="display: none;" onclick="hideIframeCon()">Cerrar</button>
+            </div>    
+        </div>
+        <div id="iframeContainerCon" style="display: none; margin-top: 20px;">
+            <iframe id="iframeTemplateCon" src="{% url 'contacto' %}" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+        </div>
         <br>
         <h1>Nav Bar</h1>
         <h3 id="hex2">#000000</h3>
@@ -195,6 +286,93 @@
         hideButton.style.display = 'none';
     }
 
+
+    function showIframeNo() {
+        const iframeContainer = document.getElementById('iframeContainerNo');
+        const showButton = document.getElementById('showIframeBtnNo');
+        const hideButton = document.getElementById('hideIframeBtnNo');
+
+        // Mostrar el contenedor y ocultar el botón de mostrar
+        iframeContainer.style.display = 'block';
+        showButton.style.display = 'none';
+        hideButton.style.display = 'inline-block';
+    }
+
+    function hideIframeNo() {
+        const iframeContainer = document.getElementById('iframeContainerNo');
+        const showButton = document.getElementById('showIframeBtnNo');
+        const hideButton = document.getElementById('hideIframeBtnNo');
+
+        // Ocultar el contenedor y mostrar el botón de mostrar
+        iframeContainer.style.display = 'none';
+        showButton.style.display = 'inline-block';
+        hideButton.style.display = 'none';
+    }
+
+    function showIframePro() {
+        const iframeContainer = document.getElementById('iframeContainerPro');
+        const showButton = document.getElementById('showIframeBtnPro');
+        const hideButton = document.getElementById('hideIframeBtnPro');
+
+        // Mostrar el contenedor y ocultar el botón de mostrar
+        iframeContainer.style.display = 'block';
+        showButton.style.display = 'none';
+        hideButton.style.display = 'inline-block';
+    }
+
+    function hideIframePro() {
+        const iframeContainer = document.getElementById('iframeContainerPro');
+        const showButton = document.getElementById('showIframeBtnPro');
+        const hideButton = document.getElementById('hideIframeBtnPro');
+
+        // Ocultar el contenedor y mostrar el botón de mostrar
+        iframeContainer.style.display = 'none';
+        showButton.style.display = 'inline-block';
+        hideButton.style.display = 'none';
+    }
+
+    function showIframeCon() {
+        const iframeContainer = document.getElementById('iframeContainerCon');
+        const showButton = document.getElementById('showIframeBtnCon');
+        const hideButton = document.getElementById('hideIframeBtnCon');
+
+        // Mostrar el contenedor y ocultar el botón de mostrar
+        iframeContainer.style.display = 'block';
+        showButton.style.display = 'none';
+        hideButton.style.display = 'inline-block';
+    }
+
+    function hideIframeCon() {
+        const iframeContainer = document.getElementById('iframeContainerCon');
+        const showButton = document.getElementById('showIframeBtnCon');
+        const hideButton = document.getElementById('hideIframeBtnCon');
+
+        // Ocultar el contenedor y mostrar el botón de mostrar
+        iframeContainer.style.display = 'none';
+        showButton.style.display = 'inline-block';
+        hideButton.style.display = 'none';
+    }
+
+</script>
+
+
+<script>
+    // Selecciona todos los inputs de tipo color y sus respectivos elementos <h3>
+    const colorPickers = document.querySelectorAll('input[type="color"]');
+
+    colorPickers.forEach(picker => {
+        // Busca el h3 más cercano al input
+        const hexText = picker.closest('.row-color').querySelector('h3');
+
+        // Agrega el evento para cambiar el color y el texto del h3
+        picker.addEventListener('input', (event) => {
+            const selectedColor = event.target.value;
+
+            // Cambia el color y el contenido del h3
+            hexText.style.color = selectedColor;
+            hexText.textContent = selectedColor;
+        });
+    });
 </script>
 {% endblock %}
 

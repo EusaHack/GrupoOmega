@@ -190,8 +190,12 @@ class ModifView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         pagina = Pagina.objects.first()
         pagina_nosotros = PaginaNosotros.objects.first()
+        pagina_productos = PaginaProductos.objects.first()
+        pagina_contacto = PaginaContacto.objects.first()
         context['form'] = PaginaForm(instance=pagina)
         context['form_nosotros'] = PaginaFormNosotros(instance=pagina_nosotros)
+        context['form_productos'] = PaginaFormProductos(instance=pagina_productos)
+        context['form_contacto'] = PaginaFormContacto(instance=pagina_contacto)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -230,6 +234,60 @@ class ModifView(LoginRequiredMixin, TemplateView):
                     messages.success(request, "Datos del formulario principal actualizados correctamente")
                 return redirect('modificaciones')
 
+        elif form_name == 'form_productos':
+            # Procesar el formulario de "Nosotros"
+            pagina_productos = PaginaProductos.objects.first()
+            if action == 'restore':
+                backup_data = request.session.get('backup_data_productos', {})
+                if backup_data:
+                    for field, value in backup_data.items():
+                        setattr(pagina_productos, field, value)
+                    pagina_productos.save()
+                    messages.success(request, "Datos del formulario 'Nosotros' restaurados correctamente")
+                else:
+                    messages.error(request, "No hay datos anteriores para restaurar en el formulario 'Nosotros'")
+                return redirect('modificaciones')
+
+            elif action == 'save':
+                request.session['backup_data_productos'] = {
+                    'color_letra_titulo': pagina_productos.color_letra_titulo,
+                    'color_letra_titulo_dos': pagina_productos.color_letra_titulo_dos,
+                    'color_btn': pagina_productos.color_btn,
+                    'color_letra_btn': pagina_productos.color_letra_btn,
+                }
+                form_productos = PaginaFormProductos(request.POST, instance=pagina_productos)
+                if form_productos.is_valid():
+                    form_productos.save()
+                    messages.success(request, "Datos del formulario 'Nosotros' actualizados correctamente")
+                return redirect('modificaciones')
+            
+        elif form_name == 'form_contacto':
+            # Procesar el formulario de "Nosotros"
+            pagina_contacto = PaginaContacto.objects.first()
+            if action == 'restore':
+                backup_data = request.session.get('backup_data_contacto', {})
+                if backup_data:
+                    for field, value in backup_data.items():
+                        setattr(pagina_contacto, field, value)
+                    pagina_contacto.save()
+                    messages.success(request, "Datos del formulario 'Nosotros' restaurados correctamente")
+                else:
+                    messages.error(request, "No hay datos anteriores para restaurar en el formulario 'Nosotros'")
+                return redirect('modificaciones')
+
+            elif action == 'save':
+                request.session['backup_data_contacto'] = {
+                    'color_letra_titulo': pagina_contacto.color_letra_titulo,
+                    'color_letra_titulo_dos': pagina_contacto.color_letra_titulo_dos,
+                    'color_btn': pagina_contacto.color_btn,
+                    'color_letra_btn': pagina_contacto.color_letra_btn,
+                }
+                form_contacto = PaginaFormContacto(request.POST, instance=pagina_contacto)
+                if form_contacto.is_valid():
+                    form_contacto.save()
+                    messages.success(request, "Datos del formulario 'Nosotros' actualizados correctamente")
+                return redirect('modificaciones')
+            
         elif form_name == 'form_nosotros':
             # Procesar el formulario de "Nosotros"
             pagina_nosotros = PaginaNosotros.objects.first()

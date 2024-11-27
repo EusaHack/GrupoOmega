@@ -7,11 +7,11 @@
         <img class="image-contact" src="{% static 'inicio/images/home-images/need-help.jpg' %}" alt="">
     </div>
     <div class="txt-need-help">
-        <h2>¿Necesitas Ayuda?</h2>
-        <p>¿Tienes preguntas o requieres asistencia con nuestros productos de cartón? Estamos aquí para ayudarte. 
+        <h2 style="color: {{ pagina.color_letra_titulo }};">¿Necesitas Ayuda?</h2>
+        <p style="color: {{ pagina.color_letra_titulo_dos }};">¿Tienes preguntas o requieres asistencia con nuestros productos de cartón? Estamos aquí para ayudarte. 
             Nuestro equipo de atención al cliente está disponible para brindarte toda la información y el soporte que necesitas. 
             ¡Contáctanos y encontraremos la solución ideal para tus necesidades de embalaje!.</p>
-        <button onclick="openModalForm()">Contáctanos</button>
+        <button style="color: {{ pagina.color_letra_btn }}; background-color: {{ pagina.color_btn }};" onclick="openModalForm()">Contáctanos</button>
         <!-- Íconos de redes sociales -->
         <div class="social-icons">
             <a href="https://www.facebook.com/profile.php?id=61554956206085" target="_blank" class="icon-facebook" aria-label="Facebook">

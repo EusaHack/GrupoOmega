@@ -29,3 +29,15 @@ class PaginaFormNosotros(forms.ModelForm):
     class Meta:
         model = PaginaNosotros
         fields = ['titulo', 'titulo_dos','color_letra_titulo','color_letra_titulo_dos','txt_uno','txt_dos','color_txt_uno','color_txt_dos']
+        
+        
+class PaginaFormProductos(forms.ModelForm):
+    class Meta:
+        model = PaginaProductos
+        fields = ['color_letra_titulo', 'color_letra_titulo_dos','color_btn','color_letra_btn']
+        
+
+class PaginaFormContacto(forms.ModelForm):
+    class Meta:
+        model = PaginaContacto
+        fields = ['color_letra_titulo', 'color_letra_titulo_dos','color_btn','color_letra_btn']

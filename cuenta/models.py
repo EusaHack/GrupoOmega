@@ -100,3 +100,22 @@ class PaginaNosotros(models.Model):
 
     def __str__(self):
         return 'Nosotros'
+    
+
+class PaginaProductos(models.Model):
+    color_letra_titulo = models.CharField(max_length=8, default="#2b4e71")
+    color_letra_titulo_dos = models.CharField(max_length=8, default="#ffffff")
+    color_btn = models.CharField(max_length=8, default="#2b4e71")
+    color_letra_btn = models.CharField(max_length=8, default="#ffffff")
+
+    def __str__(self):
+        return 'Productos'
+    
+class PaginaContacto(models.Model):
+    color_letra_titulo = models.CharField(max_length=8, default="#2b4e71")
+    color_letra_titulo_dos = models.CharField(max_length=8, default="#ffffff")
+    color_btn = models.CharField(max_length=8, default="#2b4e71")
+    color_letra_btn = models.CharField(max_length=8, default="#ffffff")
+
+    def __str__(self):
+        return 'Contacto'

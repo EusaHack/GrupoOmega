@@ -38,6 +38,12 @@ class nosotros(TemplateView):
 class productos(TemplateView):
     template_name = "inicio/productos.html"
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pagina = PaginaProductos.objects.first()
+        context['pagina'] = pagina
+        return context
+
     def post(self, request, *args, **kwargs):
         producto = request.POST.get("producto")
         cantidad = request.POST.get("cantidad")
@@ -53,6 +59,13 @@ class productos(TemplateView):
 
 class contacto(TemplateView):
     template_name = "inicio/contacto.html"
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pagina = PaginaContacto.objects.first()
+        context['pagina'] = pagina
+        return context
     
     def post(self, request, *args, **kwargs):
         producto = request.POST.get("producto")

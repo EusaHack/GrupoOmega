@@ -6,31 +6,31 @@
         <img id="image-carousel" src="{% static 'inicio/images/carousel/cardboard-box-preview.png'%}" alt="">
     </div>
     <div class="txt-products">
-        <h2>Productos</h2>
+        <h2 style="color: {{ pagina.color_letra_titulo }};">Productos</h2>
         <ul class="list-product">
-            <li>
+            <li style="color: {{ pagina.color_letra_titulo_dos }};">
                 <div id="txt-1">✓ Cajas para usos múltiples </div>
             </li>
-            <li>
+            <li style="color: {{ pagina.color_letra_titulo_dos }};">
                 <div id="txt-2">✓ Cajas para envíos de venta en línea </div>
             </li>
-            <li>
+            <li style="color: {{ pagina.color_letra_titulo_dos }};">
                 <div id="txt-3">✓ Cajas para archivo muerto </div>
             </li>
-            <li>
+            <li style="color: {{ pagina.color_letra_titulo_dos }};">
                 <div id="txt-4">✓ Contenedores cerrados </div>
             </li>
-            <li>
+            <li style="color: {{ pagina.color_letra_titulo_dos }};">
                 <div id="txt-5">✓ Contenedores calados </div>
             </li>
-            <li>
+            <li style="color: {{ pagina.color_letra_titulo_dos }};">
                 <div id="txt-6">✓ Cartón corrugado </div>
             </li>
-            <li>
+            <li style="color: {{ pagina.color_letra_titulo_dos }};">
                 <div id="txt-7">✓ Esquineros </div>
             </li>
         </ul>
-        <button onclick="openModalForm()">Realiza una Cotización</button>
+        <button style="color: {{ pagina.color_letra_btn }}; background-color: {{ pagina.color_btn }};" onclick="openModalForm()">Realiza una Cotización</button>
     </div>
 </section>
 {% endblock %}

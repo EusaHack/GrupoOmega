@@ -12,4 +12,5 @@ admin.site.register(Producto)
 admin.site.register(Pedido, PedidoAdmin)
 admin.site.register(Pagina)
 admin.site.register(PaginaNosotros)
-
+admin.site.register(PaginaProductos)
+admin.site.register(PaginaContacto)

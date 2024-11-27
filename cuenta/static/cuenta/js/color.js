@@ -14,8 +14,8 @@ document.querySelectorAll('.cont-int').forEach(container => {
 });
 
 
-document.querySelectorAll('.cont-int1').forEach(container => {
-    const colorInput = container.querySelector('.color-picker'),
+document.querySelectorAll('.cont-int').forEach(container => {
+    const colorInput = container.querySelector('.color-picker-2'),
     button = container.querySelector('.color-button1'),
     hex = document.querySelector('#hex1');
 
